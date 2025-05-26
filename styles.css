@@ -1,4 +1,121 @@
+:root {
+    --dark-slate-gray: #335c67ff;
+    --vanilla: #fff3b0ff;
+    --hunyadi-yellow: #e09f3eff;
+    --auburn: #9e2a2bff;
+    --chocolate-cosmos: #540b0eff;
+}
+
 body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--vanilla); /* Vanilla */
+    color: var(--dark-slate-gray); /* Dark Slate Gray */
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: var(--hunyadi-yellow); /* Hunyadi Yellow */
+    color: var(--chocolate-cosmos); /* Chocolate Cosmos */
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--auburn); /* Auburn */
+    width: 100%;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+.location {
+    font-style: italic;
+    color: var(--auburn); /* Auburn */
+}
+
+main {
+    width: 80%;
+    max-width: 960px;
+}
+
+section {
+    padding: 2rem;
+    background-color: #fff; /* White for content blocks */
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: var(--chocolate-cosmos); /* Chocolate Cosmos */
+    margin-top: 0;
+    border-bottom: 2px solid var(--hunyadi-yellow); /* Hunyadi Yellow */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#benefits ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+#benefits li {
+    background-color: #f9fbe7; /* Light Yellowish */
+    color: var(--auburn); /* Auburn */
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+}
+
+#contact {
+    text-align: center;
+}
+
+.qr-code {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.contact-info {
+    text-align: center;
+    font-weight: bold;
+    color: var(--dark-slate-gray); /* Dark Slate Gray */
+    margin-bottom: 1.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--auburn); /* Auburn */
+    color: var(--vanilla); /* Vanilla */
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--chocolate-cosmos); /* Chocolate Cosmos */
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--hunyadi-yellow); /* Hunyadi Yellow */
+    color: var(--chocolate-cosmos); /* Chocolate Cosmos */
+    border-top: 2px solid var(--auburn); /* Auburn */
+    width: 100%;
+    margin-top: 2rem;
+}body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;

@@ -42,7 +42,6 @@ header h1 {
 }
 
 .location {
-    font-style: italic;
     color: var(--auburn); /* Auburn */
 }
 

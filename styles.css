@@ -28,6 +28,7 @@ header {
     border-bottom: 2px solid var(--auburn); /* Auburn */
     width: 100%;
     position: relative; /* To contain the absolute button */
+    box-sizing: border-box; /* Include padding in width */
 }
 
 header h1 {
@@ -43,6 +44,7 @@ header h1 {
 
 .location {
     color: var(--auburn); /* Auburn */
+    margin-bottom: 1.5rem; /* Add margin before nav */
 }
 
 .top-right-cta {
@@ -64,10 +66,52 @@ header h1 {
     background-color: var(--chocolate-cosmos); /* Chocolate Cosmos */
 }
 
+/* Tab Navigation Styles */
+nav {
+    margin-top: 1rem;
+    border-top: 1px solid var(--auburn); /* Separator line */
+    padding-top: 1rem;
+}
+
+.tab-button {
+    background-color: transparent;
+    border: 2px solid var(--auburn);
+    color: var(--auburn);
+    padding: 0.8rem 1.8rem;
+    margin: 0 0.5rem;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab-button:hover {
+    background-color: var(--chocolate-cosmos);
+    color: var(--vanilla);
+    border-color: var(--chocolate-cosmos);
+}
+
+.tab-button.active {
+    background-color: var(--auburn);
+    color: var(--vanilla);
+    border-color: var(--auburn);
+}
+
 main {
     width: 80%;
     max-width: 960px;
 }
+
+/* Tab Content Styles */
+.tab-content {
+    display: none; /* Hide content by default */
+}
+
+.tab-content.active {
+    display: block; /* Show active content */
+}
+
 
 section {
     padding: 2rem;
@@ -85,9 +129,12 @@ section h2 {
     margin-bottom: 1rem;
 }
 
-#benefits ul {
+#benefits ul, #services-offered ul, #qualifications ul {
     list-style: none;
     padding: 0;
+}
+
+#benefits ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
@@ -101,8 +148,21 @@ section h2 {
     text-align: center;
 }
 
-#contact {
+#services-offered li, #qualifications li {
+    background-color: #f8f8f8;
+    margin-bottom: 0.5rem;
+    padding: 0.8rem;
+    border-left: 4px solid var(--hunyadi-yellow);
+}
+
+#contact-home, #contact-about {
     text-align: center;
+}
+
+#studio img {
+    width: 100%;
+    height: auto;
+    display: block; /* Ensures no extra spacing below the image */
 }
 
 .qr-code {
@@ -117,29 +177,64 @@ section h2 {
     margin-bottom: 1.5rem;
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background-color: var(--auburn); /* Auburn */
-    color: var(--vanilla); /* Vanilla */
-    text-decoration: none;
-    border-radius: 6px;
+.cta-
+
+.enquiry-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two columns for the top fields */
+    gap: 10px; /* Adds spacing between grid items */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    grid-column: 1 / span 1; /* Each field takes one column by default */
+    margin-bottom: 10px;
+}
+
+.form-group:nth-child(5) { /* Make the message field span both columns */
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    transition: background-color 0.3s ease;
 }
 
-.cta-button:hover {
-    background-color: var(--chocolate-cosmos); /* Chocolate Cosmos */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group textarea {
+    width: calc(100% - 12px); /* Adjust width for padding */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding and border are inside the element's width */
 }
 
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: var(--hunyadi-yellow); /* Hunyadi Yellow */
-    color: var(--chocolate-cosmos); /* Chocolate Cosmos */
-    border-top: 2px solid var(--auburn); /* Auburn */
-    width: 100%;
-    margin-top: 2rem;
+.form-group textarea {
+    min-height: 100px;
+}
+
+button[type="submit"] {
+    grid-column: 1 / -1; /* Make the button span both columns */
+    background-color: #9e2a2bff; /* Example button color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button[type="submit"]:hover {
+    background-color: #9e2a2bff;
+}
+
+#enquiry-form h2 {
+    text-align: left;
+    margin-bottom: 20px;
 }

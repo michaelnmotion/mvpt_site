@@ -11,49 +11,88 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-DTHY8D3935');
     </script>
 </head>
 <body>
     <header>
-        <a href="https://calendar.app.google/5UfdBviDc1N7NPGF9" class="top-right-cta" target="_blank">Book a Call</a>
-        <h1>Michael Vincent | Personal Training</h1>
-        <p class="subtitle">Postural, Walking, Running Assessments & Training</p>
-        <p class="location">Malvern East, Victoria, Australia 3145 <span aria-hidden="true">📍</span></p>
-        <nav>
-            <button class="tab-button active" data-tab="home">Home</button>
-            <button class="tab-button" data-tab="training-services">Training & Services</button>
-            <button class="tab-button" data-tab="methodology">Methodology</button>
-            <button class="tab-button" data-tab="about">About Me</button>
-            <button class="tab-button" data-tab="contact">Contact</button>
-        </nav>
+        <div class="header-content-wrapper">
+            <img src="header_logo.png" alt="Michael Vincent Personal Training Logo" class="header-logo">
+            <nav id="main-nav">
+                <button class="tab-button active" data-tab="home">Home</button>
+                <button class="tab-button" data-tab="training-services">Training & Services</button>
+                <button class="tab-button" data-tab="methodology">Methodology</button>
+                <button class="tab-button" data-tab="about">About Me</button>
+                <button class="tab-button" data-tab="contact">Contact</button>
+            </nav>
+            <a href="https://calendar.app.google/5UfdBviDc1N7NPGF9" class="top-right-cta" target="_blank">Book a Call</a>
+            <button class="burger-menu" id="burger-menu" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
     <main>
         <div id="home" class="tab-content active">
             <section id="training-home">
                 <h2>Training that utilises the Functional Patterns Methodology</h2>
-                <p>Tailored one-on-one sessions with adaptable exercises and instruction for all ages and abilities. Improve your posture, walking, and running to achieve your health and movement goals in a highly equipped studio gym.</p>
+                <p>Welcome! I offer tailored one-on-one personal training sessions in my fully equipped studio gym located in Malvern East.</p>
+                <p> My approach is rooted in the Functional Patterns methodology, a system focused on improving your posture, walking, and running mechanics. This means we'll work on fundamental human movements to help you achieve your health and fitness goals, regardless of your age or current ability.</p>
             </section>
 
             <section id="benefits">
                 <h2>Key Focus Areas</h2>
                 <ul>
                     <li>Movement Efficiency <span aria-hidden="true">🏃‍♂️</span></li>
-                    <li>Systematic Approach <span aria-hidden="true">⚙️</span></li>
+                    <li>Resistance Training <span aria-hidden="true">💪</span></li>
                     <li>Pain Elimination <span aria-hidden="true">✔️</span></li>
+                    <li>Sports Performance <span aria-hidden="true">⛹️‍♀️</span></li>
+                    <li>Posture and Running <span aria-hidden="true">🧍‍♂️</span></li>
+                    <li>Systems Approach <span aria-hidden="true">⚙️</span></li>
                 </ul>
             </section>
 
-            <section id="contact-home">
-                <h2>Contact</h2>
-                <p>Scan the QR code or message today!</p>
-                <div class="qr-code">
-                    <img src="qr-code.png" alt="Instagram QR Code" width="150">
+            <section id="testimonials-home">
+                <h2>Testimonials</h2>
+                <div class="testimonial-carousel-container">
+                    <ul class="testimonial-slider">
+                        <li>"I spent 6 months training with Michael and it greatly improved my posture and the way I move. Michael’s passion for FP was evident in each session as he always went above and beyond to ensure all the exercises were executed perfectly to optimise results and explain the mechanics and reasoning for performing each exercise. Would highly recommend Michael if you face any pains or want to become a better athlete." - Vishal Adhikari </li>
+                        <li>"The first thing I noticed when training with Michael was that I had to adjust the rear-view mirror in the car because I was sitting so much more upright. I had a hunched posture for a really long time as well as a significant left/right hip imbalance from years of competitive cycling in a slightly skewed position. Michael made significant improvements to both my posture and my left/right mobility fairly soon after I started training with him. This has had flow on benefits to my awareness of my position on the bike and in other sports."</li>
+                        <li>"Oesteos and physiotherapists didn't really help my hip after a skiing accident that I really struggled to recover from 2 years ago. After 3 months of training with Mic just once a week I can put socks on without sitting down and my day-to-day movement is undeniably improving."</li>
+                        <li>"This is a place holder"</li>
+                        <li>"This is a place holder"</li>
+                        <li>"This is a place holder"</li>
+                    </ul>
                 </div>
-                <p class="contact-info">Michael Vincent<br>+61 0478 776 074</p>
-                <a href="https://calendar.app.google/5UfdBviDc1N7NPGF9" class="cta-button" target="_blank">Book a Discovery Call</a>
+            </section>
+
+            <section id="enquiry-form">
+                <h2>Get in Touch</h2>
+                <form action="#" method="post" class="enquiry-form">
+                    <div class="form-group">
+                        <label for="firstName">First Name*</label><br>
+                        <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name*</label><br>
+                        <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailField1">Email*</label><br>
+                        <input type="email" id="emailField1" name="email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneField1">Phone Number*</label><br>
+                        <input type="tel" id="phoneField1" name="phone" required autocomplete="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="messageField1">Your Message<br>Tell me a little bit about yourself and what you goals are!</label><br>
+                        <textarea id="messageField1" name="message" rows="5" cols="50" autocomplete="off"></textarea>
+                    </div>
+                    <button type="submit">Submit Enquiry</button>
+                </form>
             </section>
         </div>
 
@@ -72,24 +111,27 @@
             </section>
             <section id="studio">
                 <h2>The Studio</h2>
-                <img src="Studio_photo.png" alt="Studio" style="width: 800px; padding-bottom: 20px;">
+                <img src="Studio_photo.png" alt="Studio" id="studio-image">
                 <p>The Malvern East studio is fully equipped with everything needed for effective Functional Patterns training. I provide a private and focused environment for you to work towards your goals.</p>
             </section>
         </div>
 
         <div id="methodology" class="tab-content">
             <section id="functional-patterns">
-                <h2>Methodology</h2>
+                <h2>Origins</h2>
                 <p>
                     Functional Patterns is a training methodology that was founded in 2006 by CEO Naudi
                     Aguilar. Naudi has conducted seminars globally certifying practitioners. I
-                    confidently say that Functional Patterns is the best in the fitness industry. Just look at the
+                    confidently say that Functional Patterns is the best in the fitness industry. Look at the
                     results achieved worldwide by Functional Patterns practitioners.
                 </p>
             </section>
 
             <section id="what-is-fp">
                 <h2>What are Functional Patterns?</h2>
+                <p>
+                    Functional Patterns training is unique. Instead of isolated exercises, we focus on how your body moves as a whole, addressing imbalances that can lead to pain and inefficiency. By training these natural movements, you'll not only move better but also build a more resilient and capable body.
+                </p>
                 <p>
                     Unlike any other point in human history, the main health crisis we face is the imbalance
                     within our society and our disconnection from nature. Moving away from natural practices
@@ -156,24 +198,24 @@
                 <h2>Get in Touch</h2>
                 <form action="#" method="post" class="enquiry-form">
                     <div class="form-group">
-                        <label for="firstName">First Name*</label><br>
-                        <input type="text" id="firstName" name="firstName" required>
+                        <label for="firstName2">First Name*</label><br>
+                        <input type="text" id="firstName2" name="firstName" required autocomplete="given-name">
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Last Name*</label><br>
-                        <input type="text" id="lastName" name="lastName" required>
+                        <label for="lastName2">Last Name*</label><br>
+                        <input type="text" id="lastName2" name="lastName" required autocomplete="family-name">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email*</label><br>
-                        <input type="email" id="email" name="email" required>
+                        <label for="emailField2">Email*</label><br>
+                        <input type="email" id="emailField2" name="email" required autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number*</label><br>
-                        <input type="tel" id="phone" name="phone" required>
+                        <label for="phoneField2">Phone Number*</label><br>
+                        <input type="tel" id="phoneField2" name="phone" required autocomplete="tel">
                     </div>
                     <div class="form-group">
-                        <label for="message">Your Message<br>Tell me a little bit about yourself and how I can help</label><br>
-                        <textarea id="message" name="message" rows="5" cols="50"></textarea>
+                        <label for="messageField2">Your Message<br>Tell me a little bit about yourself and what you goals are!</label><br>
+                        <textarea id="messageField2" name="message" rows="5" cols="50" autocomplete="off"></textarea>
                     </div>
                     <button type="submit">Submit Enquiry</button>
                 </form>
@@ -182,7 +224,11 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Michael Vincent Personal Training</p>
+        <p class="footer-copyright">© 2025 Michael Vincent Personal Training</p>
+        <p class="footer-address">Malvern East, Victoria, Australia 3145</p>
+        <p class="footer-disclaimer">
+            Certified with Functional Patterns. Michael Vincent Personal Training is an independent entity and does not represent Functional Patterns, LLC or its affiliates.
+        </p>
     </footer>
     <script src="script.js"></script>
 </body>

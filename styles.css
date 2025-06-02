@@ -169,7 +169,7 @@ section h2 {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Adjusted min width */
     gap: 1rem;
 }
 
@@ -224,13 +224,39 @@ section h2 {
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    min-height: 180px;
+    min-height: 200px; /* Adjusted min-height slightly for new content */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 .testimonial-slider li:last-child {
     margin-right: 0;
+}
+
+.testimonial-text {
+    margin-bottom: 1rem; /* Space between testimonial text and details */
+    flex-grow: 1; /* Allows text to take available space */
+}
+
+.testimonial-details {
+    margin-top: auto; /* Pushes this block to the bottom */
+    padding-top: 0.75rem; /* Space above the details */
+    border-top: 1px solid #eeeeee; /* Light separator line */
+}
+
+.testimonial-details .name-age {
+    font-size: 0.85em;
+    font-style: italic;
+    color: var(--primary-2-slate-grey); /* Or var(--primary-1-deep-teal) for more emphasis */
+    margin-bottom: 0.25rem;
+    text-align: right;
+}
+
+.testimonial-details .star-rating {
+    font-size: 1.1em; /* Adjust size as needed */
+    color: var(--secondary-2-accent-muted-gold); /* Gold color for stars */
+    text-align: right;
+    letter-spacing: 1.5px; /* Adds a little space between stars */
 }
 
 
@@ -355,6 +381,15 @@ footer {
     box-sizing: border-box;
 }
 
+.footer-logo {
+    height: 50px; 
+    width: auto;
+    margin-bottom: 1rem; /* Space between logo and text */
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
 footer p { /* General styling for all paragraphs in footer */
     margin: 0.5rem auto; /* Spacing between paragraphs, centered */
     font-size: 0.9em;
@@ -444,12 +479,16 @@ footer p { /* General styling for all paragraphs in footer */
         font-size: 0.9em;
     }
     .testimonial-slider li {
-        width: calc(90% - 1.5rem);
+        width: calc(90% - 1.5rem); /* Ensure this is wide enough for content */
+        min-height: 220px; /* May need further adjustment for small screens */
     }
     footer p {
         font-size: 0.85em;
     }
     .footer-disclaimer {
         font-size: 0.75em;
+    }
+    .footer-logo {
+        height: 40px;
     }
 }

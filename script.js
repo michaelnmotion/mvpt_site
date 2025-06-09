@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         burger.setAttribute('aria-expanded', 'false');
                     }
                 }
-                 // Scroll to top of main content on tab click
-                window.scrollTo({ top: header.offsetHeight, behavior: 'smooth' });
+                // Scroll to top of page; padding-top on main content will handle the offset
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     }

@@ -247,4 +247,71 @@ document.addEventListener('DOMContentLoaded', () => {
              }
         }
     }
+// --- NEW: Asynchronous Form Submission Logic ---
+    const handleFormSubmit = (event) => {
+        event.preventDefault(); // Prevent the default form submission (page redirect)
+        const form = event.target;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        // Disable button and show a "sending" state
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+        }
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'Accept': 'application/json' // Requesting a JSON response if available
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // On success, create and display the success message
+                const successMessageContainer = document.createElement('div');
+                successMessageContainer.className = 'form-submission-message';
+                successMessageContainer.innerHTML = `
+                    <h3>Thank You!</h3>
+                    <p>Your enquiry has been sent successfully. I will get back to you shortly.</p>
+                `;
+                // Replace the form's parent section with the success message
+                const formSection = form.closest('section');
+                if (formSection) {
+                    formSection.parentNode.replaceChild(successMessageContainer, formSection);
+                } else {
+                    // Fallback if the form is not in a section
+                    form.parentNode.replaceChild(successMessageContainer, form);
+                }
+            } else {
+                // On failure, alert the user and re-enable the form
+                response.json().then(data => {
+                    console.error("Form submission error:", data);
+                    alert('Sorry, there was an error submitting your form. Please try again or contact me directly.');
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Submit Enquiry';
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            // Handle network errors
+            console.error('Network error:', error);
+            alert('A network error occurred. Please check your connection and try again.');
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit Enquiry';
+            }
+        });
+    };
+
+    // Attach the submit event listener to both forms on the page
+    const enquiryForms = document.querySelectorAll('.enquiry-form');
+    if (enquiryForms.length > 0) {
+        enquiryForms.forEach(form => {
+            form.addEventListener('submit', handleFormSubmit);
+        });
+    }
 });

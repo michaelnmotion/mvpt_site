@@ -284,6 +284,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Fallback if the form is not in a section
                     form.parentNode.replaceChild(successMessageContainer, form);
                 }
+                // >>> ADD THE FOLLOWING CODE HERE <<<
+                // This pushes the custom event to the dataLayer for GTM to pick up
+                if (window.dataLayer) {
+                    window.dataLayer.push({
+                        'event': 'form_submit_success',
+                        'form_name': 'enquiry_contact_form', // Custom parameter for GTM
+                        // You can add more data here if your GTM tags need it, e.g.:
+                        // 'email_address': data.email,
+                        // 'first_name': data.firstName,
+                        // 'last_name': data.lastName
+                    });
+                    console.log('dataLayer event: form_submit_success pushed.');
+                } else {
+                    console.warn('dataLayer not found. Event not pushed.');
+                }
+                // >>> END OF CODE TO ADD <<<
+
             } else {
                 // On failure, alert the user and re-enable the form
                 response.json().then(data => {

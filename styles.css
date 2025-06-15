@@ -111,6 +111,7 @@ nav#main-nav {
     white-space: nowrap;
     position: relative;
     opacity: 0.8;
+    text-decoration: none;
 }
 
 .tab-button::after {

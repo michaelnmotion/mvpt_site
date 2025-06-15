@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('.tab-button');
-    const contents = document.querySelectorAll('.tab-content');
     const burger = document.getElementById('burger-menu');
     const mainNav = document.getElementById('main-nav');
     const header = document.querySelector('header'); // Get the header element
@@ -19,34 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', handleScroll);
     }
     
-    // --- Existing Tab functionality ---
-    if (tabs.length > 0 && contents.length > 0) {
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetId = tab.getAttribute('data-tab');
-
-                tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-
-                tab.classList.add('active');
-                const targetContent = document.getElementById(targetId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
-
-                if (mainNav && mainNav.classList.contains('mobile-active')) {
-                    mainNav.classList.remove('mobile-active');
-                    if (burger) {
-                        burger.classList.remove('open');
-                        burger.setAttribute('aria-expanded', 'false');
-                    }
-                }
-                // Scroll to top of page; padding-top on main content will handle the offset
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-    }
-
     // --- Existing Burger menu toggle ---
     if (burger && mainNav) {
         burger.addEventListener('click', () => {
@@ -324,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Attach the submit event listener to both forms on the page
+    // Attach the submit event listener to all forms on the page that have the class 'enquiry-form'
     const enquiryForms = document.querySelectorAll('.enquiry-form');
     if (enquiryForms.length > 0) {
         enquiryForms.forEach(form => {

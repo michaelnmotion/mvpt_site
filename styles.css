@@ -576,6 +576,45 @@ footer p {
     margin-top: 1.5rem;
 }
 
+/* ================== MY PROGRESS SECTION ================== */
+#my-progress {
+    text-align: center;
+}
+
+#my-progress .progress-caption {
+    margin-top: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.progress-video-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.video-wrapper {
+    flex: 1;
+    max-width: 400px;
+    text-align: center;
+}
+
+.video-wrapper h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: var(--primary-1-deep-teal);
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--subtle-shadow);
+}
+
 
 /* ================== MEDIA QUERIES (Mobile Fixes) ================== */
 
@@ -712,6 +751,18 @@ footer p {
     }
     .carousel-button.next {
         right: 5px;
+    }
+
+    /* My Progress Videos on mobile */
+    .progress-video-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .video-wrapper {
+        width: 100%;
+        max-width: 450px;
     }
 }
 

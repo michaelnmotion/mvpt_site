@@ -1,3 +1,17 @@
+// Cliniko Booking Confirmation Listener
+window.addEventListener("message", receiveMessage);
+ 
+function receiveMessage(e) {
+    if (typeof e.data !== 'string') return;
+    if (e.data.search('cliniko-bookings-page:confirmed') > -1) {
+        var dataLayer = window.dataLayer || (window.dataLayer = []);
+        dataLayer.push({
+            'event': 'clinikoBookingCompleted'
+        });
+        console.log('Cliniko booking confirmed event pushed to dataLayer.'); // Added for debugging
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const burger = document.getElementById('burger-menu');
     const mainNav = document.getElementById('main-nav');

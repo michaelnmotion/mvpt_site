@@ -848,3 +848,35 @@ footer p {
     font-size: 1.1rem;
     line-height: 1.6;
 }
+
+
+/* --- Add this to your styles.css file for the discount --- */
+
+/* Styles the promotional box */
+.offer-box {
+    background-color: #e6f7ff; /* A light, friendly blue */
+    border: 1px dashed #096dd9;  /* A dashed blue border */
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 20px 0; /* Adds space above and below the box */
+    text-align: center;
+}
+
+.offer-box p {
+    margin: 0;
+    font-size: 1.1em; /* Makes the text slightly larger */
+}
+
+/* Styles the new, discounted price */
+.sale-price {
+    color: #28a745; /* A success/money green color */
+    font-size: 1.2em; /* Makes the new price pop */
+    font-weight: bold;
+}
+
+/* Styles the old, crossed-out price */
+del {
+    color: #6c757d; /* A muted grey color */
+    font-size: 1em;
+    margin-right: 10px; /* Adds space between old and new price */
+}

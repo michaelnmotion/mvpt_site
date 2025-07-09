@@ -12,7 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Attach the scroll event listener
+    // Promo Bar
+    const promoBar = document.getElementById('promo-bar');
+    const closeBtn = document.getElementById('close-promo');
+
+    if (promoBar && closeBtn) {
+        if (localStorage.getItem('promoClosed') !== 'true') {
+            promoBar.classList.add('enabled');
+        }
+
+        closeBtn.addEventListener('click', () => {
+            promoBar.classList.remove('enabled');
+            localStorage.setItem('promoClosed', 'true');
+        });
+    }
+
+    // Attach the scroll event listener (now independent of the promo bar)
     if (header) {
         window.addEventListener('scroll', handleScroll);
     }
@@ -302,3 +317,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+

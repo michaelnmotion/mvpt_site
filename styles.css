@@ -772,6 +772,7 @@ footer p {
         width: 100%;
         max-width: 450px;
     }
+    
 }
 
 
@@ -941,13 +942,42 @@ del {
     padding-top: calc(75px + 50px); /* Original padding-top + promo bar height */
 }
 
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 880px) {
     .promo-bar.enabled + header {
         top: 46px; /* Adjust if promo bar height changes on mobile */
     }
 
+    /* This rule correctly adjusts the main content padding on tablet sizes */
     .promo-bar.enabled ~ main {
         padding-top: calc(70px + 46px);
+    }
+}
+
+@media (max-width: 767px) {
+    .promo-bar {
+        font-size: 0.85rem;
+        padding: 10px 10px; /* Reduced side padding a bit */
+        gap: 0.5rem;
+    }
+
+    .promo-message {
+        flex-grow: 1; /* Allows message to shrink to make room */
+        text-align: center; 
+    }
+
+    .close-promo {
+        font-size: 2.1rem;      /* Makes the 'x' larger */
+        font-weight: 400;     /* A slightly thinner 'x' can look cleaner */
+        padding: 0 15px;      /* Increases the tappable area */
+        flex-shrink: 0;       /* Prevents the button from shrinking */
+    }
+}
+
+@media (max-width: 480px) {
+    /* This rule correctly adjusts the main content padding on smaller mobile sizes */
+    .promo-bar.enabled ~ main {
+        padding-top: calc(65px + 46px);
     }
 }

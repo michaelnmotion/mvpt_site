@@ -38,7 +38,8 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    transition: box-shadow 0.3s ease;
+    transition: top 0.4s ease-in-out, box-shadow 0.3s ease; /* Add 'top' transition */
+
 }
 
 header.scrolled {
@@ -879,4 +880,74 @@ del {
     color: #6c757d; /* A muted grey color */
     font-size: 1em;
     margin-right: 10px; /* Adds space between old and new price */
+}
+
+/* ================== PROMO BAR STYLES ================== */
+
+/* Style for the promo bar itself */
+.promo-bar {
+    background-color: var(--secondary-2-accent-muted-gold);
+    color: var(--primary-1-deep-teal);
+    padding: 12px 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: fixed;
+    top: -100px; /* Start hidden above the viewport */
+    left: 0;
+    width: 100%;
+    z-index: 1001; /* Higher than the header's z-index */
+    transition: top 0.4s ease-in-out;
+    box-shadow: var(--subtle-shadow);
+}
+
+/* This class makes the promo bar visible */
+.promo-bar.enabled {
+    top: 0; /* Slide into view */
+}
+
+.promo-message strong {
+    font-weight: 700;
+}
+
+/* Style for the close button '×' */
+.close-promo {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--primary-1-deep-teal);
+    cursor: pointer;
+    padding: 0 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.close-promo:hover {
+    transform: scale(1.1);
+}
+
+/* --- Key Adjustment for Your Header --- */
+/* When the promo bar is enabled, push the main header down */
+.promo-bar.enabled + header {
+    top: 50px; /* Adjust this value to match the height of your promo bar */
+}
+
+/* Ensure the main content is also pushed down correctly */
+.promo-bar.enabled ~ main {
+    padding-top: calc(75px + 50px); /* Original padding-top + promo bar height */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 880px) {
+    .promo-bar.enabled + header {
+        top: 46px; /* Adjust if promo bar height changes on mobile */
+    }
+
+    .promo-bar.enabled ~ main {
+        padding-top: calc(70px + 46px);
+    }
 }

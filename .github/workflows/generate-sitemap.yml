@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0 # Crucial for accurate 'lastmod' dates based on commit history
 
       - name: Generate sitemap
-        uses: cicirello/generate-sitemap@v1.11.0 # Use the latest stable version if available
+        uses: cicirello/generate-sitemap@v1.10.0 # Use the latest stable version if available
         with:
           # IMPORTANT: Use your custom domain here, not the github.io URL
           base-url-path: https://michaelvincentpt.com.au/

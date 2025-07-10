@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0 # Crucial for accurate 'lastmod' dates based on commit history
 
       - name: Generate sitemap
-        uses: cicirello/generate-sitemap@v2.0.0 # Use the latest stable version if available, or specify v2.0.0 as this is reliable
+        uses: cicirello/generate-sitemap@v1.11.0 # Use the latest stable version if available
         with:
           # IMPORTANT: Use your custom domain here, not the github.io URL
           base-url-path: https://michaelvincentpt.com.au/
@@ -37,7 +37,7 @@ jobs:
 
       - name: Commit and push sitemap
         # Use EndBug/add-and-commit for committing the generated file
-        uses: EndBug/add-and-commit@v10 # Latest stable version at time of writing
+        uses: EndBug/add-and-commit@v9 # Latest stable version at time of writing
         with:
           author_name: GitHub Actions
           author_email: github-actions[bot]@users.noreply.github.com

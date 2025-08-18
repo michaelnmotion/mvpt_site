@@ -1,5 +1,4 @@
-/* Import Google Font: Poppins */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+/* Google Fonts are now loaded via HTML link tags for better performance */
 
 :root {
     --primary-1-deep-teal: #006978;
@@ -8,9 +7,15 @@
     --secondary-2-accent-muted-gold: #C09E74;
     --accent-muted-gold-darker: #a0825e; /* For hovers */
 
-    /* Added for modern feel */
-    --soft-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    --subtle-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    /* Enhanced shadows and transitions for modern feel */
+    --soft-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --subtle-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --card-hover-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    --button-shadow: 0 4px 15px rgba(192, 158, 116, 0.3);
+    
+    /* Enhanced transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 body {
@@ -66,22 +71,40 @@ header.scrolled {
 .top-right-cta {
     display: inline-block;
     padding: 0.7rem 1.5rem;
-    background-color: var(--secondary-2-accent-muted-gold);
+    background: linear-gradient(135deg, var(--secondary-2-accent-muted-gold) 0%, var(--accent-muted-gold-darker) 100%);
     color: var(--primary-1-deep-teal);
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.9em;
-    transition: all 0.3s ease;
+    transition: var(--transition-bounce);
     flex-shrink: 0;
     margin-left: 1rem;
+    box-shadow: var(--button-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.top-right-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.top-right-cta:hover::before {
+    left: 100%;
 }
 
 .top-right-cta:hover {
-    background-color: var(--accent-muted-gold-darker);
+    background: linear-gradient(135deg, var(--accent-muted-gold-darker) 0%, var(--secondary-2-accent-muted-gold) 100%);
     color: var(--secondary-1-background-neutral);
-    transform: translateY(-2px);
-    box-shadow: var(--soft-shadow);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(192, 158, 116, 0.4);
 }
 
 nav#main-nav {
@@ -192,9 +215,33 @@ section {
     padding: 2.5rem;
     background-color: #fff;
     margin-bottom: 2rem;
-    border-radius: 12px;
+    border-radius: 16px;
     box-shadow: var(--subtle-shadow);
     border: 1px solid #EAEAEA;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-2-accent-muted-gold) 0%, var(--primary-1-deep-teal) 100%);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+section:hover::before {
+    opacity: 1;
+}
+
+section:hover {
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-2px);
 }
 
 section h2 {
@@ -278,19 +325,41 @@ section h2 {
 }
 
 #benefits li {
-    background-color: var(--secondary-1-background-neutral);
+    background: linear-gradient(135deg, var(--secondary-1-background-neutral) 0%, #fff 100%);
     color: var(--primary-1-deep-teal);
-    padding: 1.5rem 1rem;
-    border-radius: 10px;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
     text-align: center;
-    border: 1px solid #e0e0e0;
+    border: 2px solid transparent;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+#benefits li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--secondary-2-accent-muted-gold), var(--primary-1-deep-teal));
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: -1;
+}
+
+#benefits li:hover::before {
+    opacity: 0.1;
 }
 
 #benefits li:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--soft-shadow);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--card-hover-shadow);
+    border-color: var(--secondary-2-accent-muted-gold);
+    color: var(--primary-1-deep-teal);
 }
 
 
@@ -464,20 +533,45 @@ section h2 {
 
 .cta-button {
     display: inline-block;
-    padding: 1rem 2rem;
-    background-color: var(--secondary-2-accent-muted-gold);
+    padding: 1.2rem 2.5rem;
+    background: linear-gradient(135deg, var(--secondary-2-accent-muted-gold) 0%, var(--accent-muted-gold-darker) 100%);
     color: var(--primary-1-deep-teal);
     text-decoration: none;
     border-radius: 50px;
     font-weight: 700;
-    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    transition: var(--transition-bounce);
+    box-shadow: var(--button-shadow);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
 }
 
 .cta-button:hover {
-    background-color: var(--accent-muted-gold-darker);
+    background: linear-gradient(135deg, var(--accent-muted-gold-darker) 0%, var(--secondary-2-accent-muted-gold) 100%);
     color: var(--secondary-1-background-neutral);
-    transform: translateY(-2px);
-    box-shadow: var(--soft-shadow);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(192, 158, 116, 0.4);
+}
+
+.cta-button:active {
+    transform: translateY(-2px) scale(1.02);
 }
 
 .enquiry-form {
@@ -624,13 +718,32 @@ footer p {
 }
 
 
-/* ================== MEDIA QUERIES (Mobile Fixes) ================== */
+/* ================== MEDIA QUERIES (Enhanced Responsive Design) ================== */
 
 @media (max-width: 880px) {
     main {
         padding-top: 70px;
         width: 95%; /* More space on tablets */
     }
+    
+    /* Improved spacing for tablet views */
+    section {
+        padding: 2rem 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Better hero sizing on tablets */
+    .hero-content h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    
+    /* Improved benefits grid */
+    #benefits ul {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.25rem;
+    }
+}
     
     .header-content-wrapper {
         padding: 0.5rem 1rem;
@@ -979,5 +1092,91 @@ del {
     /* This rule correctly adjusts the main content padding on smaller mobile sizes */
     .promo-bar.enabled ~ main {
         padding-top: calc(65px + 46px);
+    }
+}
+
+/* ================== ACCESSIBILITY STYLES ================== */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.error-message {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    min-height: 1rem;
+}
+
+.help-text {
+    display: block;
+    color: var(--primary-2-slate-grey);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.label-description {
+    font-weight: 400;
+    color: var(--primary-2-slate-grey);
+}
+
+/* Focus indicators for better accessibility */
+*:focus {
+    outline: 3px solid rgba(0, 105, 120, 0.5);
+    outline-offset: 2px;
+}
+
+.tab-button:focus,
+.cta-button:focus,
+.top-right-cta:focus,
+button:focus {
+    outline: 3px solid rgba(192, 158, 116, 0.7);
+    outline-offset: 2px;
+}
+
+/* Improve contrast for better readability */
+.testimonial-text {
+    color: #333;
+    line-height: 1.6;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-2-slate-grey: #2c3e50;
+        --secondary-1-background-neutral: #ffffff;
+    }
+    
+    section {
+        border: 2px solid #333;
+    }
+    
+    .cta-button, .top-right-cta {
+        border: 2px solid var(--primary-1-deep-teal);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .testimonial-slider {
+        animation: none !important;
     }
 }

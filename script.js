@@ -318,3 +318,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// --- FAQ Dropdown Logic ---
+const faqQuestions = document.querySelectorAll('.faq-question');
+
+faqQuestions.forEach((button) => {
+  button.addEventListener('click', () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    // Close all others (optional, accordion style)
+    faqQuestions.forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.nextElementSibling.style.maxHeight = null;
+      btn.querySelector('.faq-icon').textContent = '+';
+    });
+
+    // Toggle clicked one
+    if (!expanded) {
+      button.setAttribute('aria-expanded', 'true');
+      const answer = button.nextElementSibling;
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      button.querySelector('.faq-icon').textContent = '−';
+    }
+  });
+});

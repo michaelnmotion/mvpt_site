@@ -1180,3 +1180,35 @@ button:focus {
         animation: none !important;
     }
 }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem;
+  cursor: pointer;
+  color: var(--primary-1-deep-teal);
+}
+
+.faq-question:hover,
+.faq-question:focus {
+  background-color: rgba(0, 105, 120, 0.05);
+}
+
+.faq-icon {
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--secondary-2-accent-muted-gold);
+}

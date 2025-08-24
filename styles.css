@@ -1212,3 +1212,33 @@ button:focus {
   font-weight: bold;
   color: var(--secondary-2-accent-muted-gold);
 }
+
+/* Instagram carousel */
+.ig-carousel { margin-top: 1.25rem; }
+.ig-carousel-header {
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-bottom: .5rem;
+}
+.ig-carousel-header h3 { font-size: 1.1rem; margin: 0; }
+.ig-controls { display: flex; gap: .5rem; }
+.ig-btn {
+  border: 1px solid #e0e0e0; background: #fff; padding: .35rem .6rem;
+  border-radius: .5rem; font-size: 1rem; cursor: pointer;
+}
+.ig-btn:focus { outline: 2px solid #006978; outline-offset: 2px; }
+.ig-track {
+  display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; padding-bottom: .25rem;
+}
+.ig-embed { flex: 0 0 90%; max-width: 560px; scroll-snap-align: start; }
+@media (min-width: 768px) { .ig-embed { flex-basis: 560px; } }
+.ig-fallback { font-size: .9rem; opacity: .8; margin-top: .5rem; }
+
+/* Training environment image */
+.fp-environment-figure { margin: 2rem 0 0; }
+.fp-environment-img {
+  width: 100%; height: auto; display: block; border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+}
+.fp-environment-figure figcaption {
+  font-size: .9rem; opacity: .85; margin-top: .5rem;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description | escape }}">
+  <meta name="theme-color" content="{{ site.themeColor }}">
+  <meta name="msapplication-TileColor" content="{{ site.themeColor }}">
+  <link rel="canonical" href="{{ canonical }}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ ogUrl | default(canonical) }}">
+  <meta property="og:title" content="{{ ogTitle | default(title) | escape }}">
+  <meta property="og:description" content="{{ ogDescription | default(description) | escape }}">
+  <meta property="og:image" content="{{ ogImage | default(site.defaultOgImage) }}">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:site_name" content="{{ site.name }}">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ ogUrl | default(canonical) }}">
+  <meta property="twitter:title" content="{{ ogTitle | default(title) | escape }}">
+  <meta property="twitter:description" content="{{ ogDescription | default(description) | escape }}">
+  <meta property="twitter:image" content="{{ ogImage | default(site.defaultOgImage) }}">
+
+  <title>{{ title }}</title>
+
+  <!-- DNS Prefetch & Preconnect for Performance -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="//www.googletagmanager.com">
+  <link rel="dns-prefetch" href="//calendar.app.google">
+
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="style">
+  <link rel="preload" href="styles.css" as="style">
+  {% if preloadVideo %}
+  <link rel="preload" href="hero_page.mp4" as="video" type="video/mp4">
+  {% endif %}
+  <link rel="preload" href="header_logo.png" as="image">
+
+  <!-- Load Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Consolidated Analytics -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','{{ site.gtmId }}');</script>
+
+  <!-- Google Analytics & Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', '{{ site.gaId }}');
+    gtag('config', '{{ site.adsId }}');
+  </script>
+
+  {# Optional per-page extra head (e.g., JSON-LD) #}
+  {% if extraHead %}
+    {{ extraHead | safe }}
+  {% endif %}
+</head>
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtmId }}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  {% include "partials/promo.njk" %}
+  {% include "partials/header.njk" %}
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  {% include "partials/footer.njk" %}
+  <script src="script.js"></script>
+</body>
+</html>

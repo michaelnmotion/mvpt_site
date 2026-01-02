@@ -1,4 +1,13 @@
+const sitemap = require("@quasibit/eleventy-plugin-sitemap");
+
 module.exports = function (eleventyConfig) {
+  // Sitemap plugin
+  eleventyConfig.addPlugin(sitemap, {
+    sitemap: {
+      hostname: "https://michaelvincentpt.com.au",
+    },
+  });
+
   // Copy assets + static files into the OUTPUT ROOT (so links like "styles.css" work)
   eleventyConfig.addPassthroughCopy({ "src/assets": "." });
   eleventyConfig.addPassthroughCopy({ "src/static": "." });

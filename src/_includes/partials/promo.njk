@@ -1,0 +1,6 @@
+{% if promo.enabled and (promo.showOnAllPages or showPromo) %}
+<div id="promo-bar" class="promo-bar">
+  <span class="promo-message">{{ promo.messageHtml | safe }}</span>
+  <button id="close-promo" class="close-promo" aria-label="Close promo">&times;</button>
+</div>
+{% endif %}

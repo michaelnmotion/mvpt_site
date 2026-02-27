@@ -1,0 +1,25 @@
+{
+    "name": "Michael Vincent Personal Training",
+    "short_name": "MVPT",
+    "description": "Personal trainer in Melbourne specialising in Functional Patterns. Premium 1-on-1 training for movement efficiency and pain relief.",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512", 
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#006978",
+    "background_color": "#F4F7F7",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/?utm_source=pwa",
+    "categories": ["health", "fitness", "sports"],
+    "lang": "en-AU"
+}

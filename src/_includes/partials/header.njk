@@ -1,6 +1,6 @@
 <header>
   <div class="header-content-wrapper">
-    <img src="header_logo.png" alt="{{ site.name }} Logo" class="header-logo" width="400" height="200">
+    <a href="/" aria-label="Go to homepage"><img src="header_logo.png" alt="{{ site.name }} Logo" class="header-logo" width="400" height="200"></a>
     <nav id="main-nav" role="navigation" aria-label="Main navigation">
       {% for item in navigation %}
         {% set isActive = (navKey == item.key) %}

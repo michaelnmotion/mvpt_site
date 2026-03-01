@@ -15,6 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Promo Bar
     const promoBar = document.getElementById('promo-bar');
     const closeBtn = document.getElementById('close-promo');
+    const mainEl = document.querySelector('main');
+
+    function applyPromoOffset() {
+        if (promoBar && promoBar.classList.contains('enabled')) {
+            const promoH = promoBar.offsetHeight;
+            if (header) header.style.top = promoH + 'px';
+            if (mainEl) mainEl.style.paddingTop = (promoH + (header ? header.offsetHeight : 75)) + 'px';
+        } else {
+            if (header) header.style.top = '';
+            if (mainEl) mainEl.style.paddingTop = '';
+        }
+    }
 
     if (promoBar && closeBtn) {
         if (localStorage.getItem('promoClosed') !== 'true') {
@@ -24,7 +36,11 @@ document.addEventListener('DOMContentLoaded', () => {
         closeBtn.addEventListener('click', () => {
             promoBar.classList.remove('enabled');
             localStorage.setItem('promoClosed', 'true');
+            applyPromoOffset();
         });
+
+        applyPromoOffset();
+        window.addEventListener('resize', applyPromoOffset);
     }
 
     // Attach the scroll event listener (now independent of the promo bar)

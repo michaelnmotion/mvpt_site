@@ -32,6 +32,10 @@ body {
     scroll-behavior: smooth;
 }
 
+#book-consultation {
+    scroll-margin-top: 80px;
+}
+
 header {
     background-color: var(--primary-1-deep-teal);
     color: var(--secondary-1-background-neutral);
@@ -56,7 +60,7 @@ header.scrolled {
     align-items: center;
     padding: 0.5rem 2rem;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     box-sizing: border-box;
     gap: 1rem;
@@ -577,7 +581,7 @@ section h2 {
 .enquiry-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 10px;
     padding: 0;
     border: none;
     background-color: transparent;
@@ -593,7 +597,7 @@ section h2 {
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
     font-weight: 600;
     color: var(--primary-2-slate-grey);
     font-size: 0.9em;
@@ -604,7 +608,7 @@ section h2 {
 .form-group input[type="tel"],
 .form-group textarea {
     width: 100%;
-    padding: 12px 15px;
+    padding: 6px 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-sizing: border-box;
@@ -620,7 +624,7 @@ section h2 {
 
 
 .form-group textarea {
-    min-height: 120px;
+    min-height: 60px;
     resize: vertical;
 }
 
@@ -628,7 +632,7 @@ button[type="submit"] {
     grid-column: 1 / -1;
     background-color: var(--secondary-2-accent-muted-gold);
     color: var(--primary-1-deep-teal);
-    padding: 15px 20px;
+    padding: 8px 20px;
     border: none;
     border-radius: 50px;
     cursor: pointer;

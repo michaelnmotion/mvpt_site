@@ -257,6 +257,15 @@ section h2 {
     font-weight: 700;
 }
 
+section p a {
+    color: var(--primary-2-slate-grey);
+    text-decoration: underline;
+}
+
+section p a:hover {
+    color: var(--primary-1-deep-teal);
+}
+
 /* ================== HERO VIDEO STYLES ================== */
 #hero-video-section {
     position: relative;
@@ -697,6 +706,10 @@ footer p {
 /* ================== MY PROGRESS SECTION ================== */
 #my-progress {
     text-align: center;
+}
+
+#my-progress h2 {
+    text-align: left;
 }
 
 #my-progress .progress-caption {

@@ -2,7 +2,7 @@ name: Deploy Eleventy to GitHub Pages
 
 on:
   push:
-    branches: [ "import-11ty" ]   # change to main if you want
+    branches: [ "main" ]   # change to main if you want
   workflow_dispatch:
 
 permissions:

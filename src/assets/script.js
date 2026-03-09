@@ -55,8 +55,60 @@ document.addEventListener('DOMContentLoaded', () => {
             burger.classList.toggle('open');
             const isExpanded = mainNav.classList.contains('mobile-active');
             burger.setAttribute('aria-expanded', isExpanded.toString());
+
+            // Close any open dropdowns when burger menu closes
+            if (!isExpanded) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                    menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+                });
+            }
         });
     }
+
+    // --- Nav Dropdown Toggle (mobile click & desktop keyboard) ---
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const menu = toggle.nextElementSibling;
+            const isOpen = menu.classList.contains('show');
+
+            // Close all other open dropdowns first
+            document.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
+                if (openMenu !== menu) {
+                    openMenu.classList.remove('show');
+                    openMenu.previousElementSibling.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            menu.classList.toggle('show');
+            toggle.setAttribute('aria-expanded', (!isOpen).toString());
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-dropdown')) {
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+                menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+            });
+        }
+    });
+
+    // Close mobile menu when a dropdown link is clicked
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', () => {
+            if (mainNav && mainNav.classList.contains('mobile-active')) {
+                mainNav.classList.remove('mobile-active');
+                if (burger) {
+                    burger.classList.remove('open');
+                    burger.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+    });
 
     // --- Existing Testimonial Carousel Logic (Unchanged) ---
     const testimonialSection = document.getElementById('testimonials-home');

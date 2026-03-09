@@ -772,8 +772,7 @@ footer p {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 1.25rem;
     }
-}
-    
+
     .header-content-wrapper {
         padding: 0.5rem 1rem;
         gap: 0.5rem;
@@ -1135,12 +1134,18 @@ del {
     outline-offset: 2px;
 }
 
-.tab-button:focus,
-.cta-button:focus,
-.top-right-cta:focus,
-button:focus {
+.tab-button:focus-visible,
+.cta-button:focus-visible,
+.top-right-cta:focus-visible,
+button:focus-visible {
     outline: 3px solid rgba(192, 158, 116, 0.7);
     outline-offset: 2px;
+}
+
+/* Remove focus ring on mouse click; keep it for keyboard nav */
+.tab-button:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
 }
 
 /* Improve contrast for better readability */
@@ -1295,21 +1300,96 @@ button:focus {
 
 /* Hero intro */
 .results-hero {
+    background: var(--primary-1-deep-teal);
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.results-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 70% 20%, rgba(192,158,116,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 10% 80%, rgba(255,255,255,0.03) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.results-hero-inner {
+    position: relative;
     text-align: center;
-    padding: 1rem 0 0.5rem;
+    padding: 2.5rem 2rem 2rem;
+}
+
+.results-hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--secondary-2-accent-muted-gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
 }
 
 .results-hero h2 {
-    font-size: 2rem;
-    color: var(--primary-1-deep-teal);
-    margin-bottom: 0.75rem;
+    font-size: 2.2rem;
+    color: #fff;
+    margin: 0 0 0.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .results-hero p {
-    max-width: 650px;
-    margin: 0 auto;
-    font-size: 1.05rem;
-    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 1.75rem;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(244,247,247,0.7);
+}
+
+.results-hero p strong {
+    color: rgba(255,255,255,0.9);
+}
+
+.results-hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.stat-number {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--secondary-2-accent-muted-gold);
+    letter-spacing: -0.01em;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: rgba(244,247,247,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.15);
 }
 
 /* Client section card */
@@ -1472,50 +1552,131 @@ button:focus {
     background: var(--primary-1-deep-teal);
 }
 
-/* Featured video section */
-.featured-video-section {
-    background: #fff;
-    border-radius: 16px;
-    padding: 2rem 2.5rem;
+/* ===== INSTAGRAM SHOWCASE ===== */
+/* ===== INSTAGRAM SHOWCASE ===== */
+.ig-showcase {
+    background: var(--primary-1-deep-teal);
+    border-radius: 20px;
     margin-bottom: 2rem;
-    box-shadow: var(--subtle-shadow);
-    text-align: center;
-}
-
-.video-section-header h3 {
-    font-size: 1.3rem;
-    color: var(--primary-1-deep-teal);
-    margin: 0 0 0.4rem 0;
-}
-
-.video-section-header p {
-    color: var(--primary-2-slate-grey);
-    font-size: 0.95rem;
-    margin: 0 auto 1.5rem;
-    max-width: 500px;
-    line-height: 1.6;
-}
-
-.video-embed-wrapper {
-    max-width: 400px;
-    margin: 0 auto;
-    max-height: 620px;
     overflow: hidden;
-    border-radius: 12px;
     position: relative;
 }
 
-/* Fade-out mask at bottom to hide long IG description gracefully */
-.video-embed-wrapper::after {
+.ig-showcase::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: linear-gradient(transparent, #fff);
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.04) 0%, transparent 70%),
+        radial-gradient(ellipse at 80% 20%, rgba(192,158,116,0.06) 0%, transparent 50%);
     pointer-events: none;
-    border-radius: 0 0 12px 12px;
+}
+
+.ig-showcase-inner {
+    position: relative;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    justify-content: center;
+}
+
+/* Left: text content */
+.ig-showcase-content {
+    flex: 1;
+    min-width: 0;
+    max-width: 440px;
+}
+
+.ig-showcase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--secondary-2-accent-muted-gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.25rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ig-showcase-badge:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+.ig-showcase-badge svg {
+    flex-shrink: 0;
+}
+
+.ig-showcase-content h3 {
+    font-size: 1.75rem;
+    color: #fff;
+    margin: 0 0 0.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+}
+
+.ig-showcase-content p {
+    color: rgba(244,247,247,0.65);
+    font-size: 1rem;
+    margin: 0 0 1.75rem;
+    line-height: 1.6;
+    max-width: 360px;
+}
+
+.ig-showcase-follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 100px;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.01em;
+}
+
+.ig-showcase-follow:hover {
+    background: var(--secondary-2-accent-muted-gold);
+    border-color: var(--secondary-2-accent-muted-gold);
+    color: var(--primary-1-deep-teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(192,158,116,0.3);
+}
+
+.ig-showcase-follow svg {
+    flex-shrink: 0;
+}
+
+/* Right: video */
+.ig-showcase-video {
+    flex-shrink: 0;
+    width: 280px;
+    max-height: 420px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.25),
+        0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.ig-showcase-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
 }
 
 /* Reviews grid on results page */
@@ -1569,6 +1730,36 @@ button:focus {
     font-weight: 600;
     color: var(--primary-1-deep-teal);
     font-size: 0.85rem;
+}
+
+/* Video post link */
+.video-post-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-1-deep-teal);
+    background: rgba(26,77,79,0.06);
+    border: 1px solid rgba(26,77,79,0.15);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.01em;
+}
+
+.video-post-link:hover {
+    background: var(--primary-1-deep-teal);
+    border-color: var(--primary-1-deep-teal);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(26,77,79,0.2);
+}
+
+.video-post-link svg {
+    flex-shrink: 0;
 }
 
 /* Inline CTA between sections */
@@ -1646,20 +1837,53 @@ button:focus {
         border-radius: 12px;
     }
 
+    .results-hero-inner {
+        padding: 2rem 1.25rem 1.75rem;
+    }
+
     .results-hero h2 {
         font-size: 1.5rem;
+    }
+
+    .results-hero-stats {
+        gap: 1.25rem;
+    }
+
+    .stat-number {
+        font-size: 1.1rem;
     }
 
     .client-header {
         flex-wrap: wrap;
     }
 
-    .featured-video-section {
-        padding: 1.5rem 1rem;
+    .ig-showcase-inner {
+        flex-direction: column;
+        padding: 2rem 1.25rem;
+        gap: 1.5rem;
+        text-align: center;
+        align-items: center;
     }
 
-    .video-embed-wrapper {
+    .ig-showcase-content p {
         max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .ig-showcase-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .ig-showcase-follow {
+        font-size: 0.8rem;
+        padding: 0.55rem 1.2rem;
+    }
+
+    .ig-showcase-video {
+        width: 100%;
+        max-width: 280px;
+        max-height: 400px;
     }
 
     .results-reviews-grid {
@@ -1676,5 +1900,419 @@ button:focus {
     .carousel-slide {
         flex: 0 0 100%;
         min-width: 100%;
+    }
+}
+
+/* ================== RESOURCES PAGE ================== */
+
+.resources-intro p {
+    max-width: 700px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.resource-category {
+    padding-bottom: 2rem;
+}
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+}
+
+/* Featured video embed in resources */
+.resource-video-feature {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    background: var(--primary-1-deep-teal);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.resource-video-embed {
+    flex-shrink: 0;
+    width: 400px;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.resource-video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+.resource-video-info h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+}
+
+.resource-video-info p {
+    color: rgba(244,247,247,0.65);
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.55;
+}
+
+.resource-card {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, var(--secondary-1-background-neutral) 0%, #fff 100%);
+    border: 1.5px solid #EAEAEA;
+    border-radius: 14px;
+    padding: 1.5rem 1.4rem;
+    text-decoration: none;
+    color: var(--primary-2-slate-grey);
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+}
+
+.resource-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-2-accent-muted-gold) 0%, var(--primary-1-deep-teal) 100%);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.resource-card:hover::before {
+    opacity: 1;
+}
+
+.resource-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--card-hover-shadow);
+    border-color: var(--secondary-2-accent-muted-gold);
+}
+
+.resource-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.resource-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary-1-deep-teal);
+    margin: 0 0 0.5rem 0;
+}
+
+.resource-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 0.75rem 0;
+    flex-grow: 1;
+}
+
+.resource-link-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-2-accent-muted-gold);
+    transition: color 0.3s ease;
+}
+
+.resource-card:hover .resource-link-text {
+    color: var(--accent-muted-gold-darker);
+}
+
+.resource-cta-section {
+    text-align: center;
+    background: var(--primary-1-deep-teal);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+}
+
+.resource-cta-section h2 {
+    color: #fff;
+    border-bottom-color: rgba(255,255,255,0.25);
+}
+
+.resource-cta-section p {
+    color: rgba(255,255,255,0.85);
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+@media (max-width: 767px) {
+    .resource-video-feature {
+        flex-direction: column;
+        padding: 1.25rem;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .resource-video-embed {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .resource-video-info h3 {
+        font-size: 1.05rem;
+    }
+
+    .resource-video-info p {
+        font-size: 0.88rem;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .resource-card {
+        padding: 1.25rem 1.1rem;
+    }
+
+    .resource-cta-section {
+        padding: 2rem 1.25rem;
+        border-radius: 12px;
+    }
+}
+
+/* ================== NAV DROPDOWN ================== */
+
+/* Desktop: sit inline with other nav items */
+.nav-dropdown {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* The toggle button inherits .tab-button styles; reset browser button defaults */
+.dropdown-toggle {
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+}
+
+.dropdown-arrow {
+    font-size: 0.6em;
+    transition: transform 0.3s ease;
+    line-height: 1;
+    margin-left: 0.15rem;
+}
+
+.dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Desktop dropdown panel */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background-color: var(--primary-1-deep-teal);
+    border-radius: 10px;
+    padding: 0.5rem 0;
+    min-width: 220px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    z-index: 1100;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* Triangle pointer */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-1-deep-teal);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+/* Show on hover (desktop) and on click (.show) */
+.nav-dropdown:hover .dropdown-menu,
+.dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Invisible bridge so hover doesn't break crossing the gap */
+.nav-dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 14px;
+}
+
+/* Dropdown link items */
+.dropdown-item {
+    display: block;
+    padding: 0.65rem 1.3rem;
+    color: var(--secondary-1-background-neutral);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--secondary-2-accent-muted-gold);
+    padding-left: 1.5rem;
+}
+
+.dropdown-item.active {
+    color: var(--secondary-2-accent-muted-gold);
+    font-weight: 600;
+}
+
+.dropdown-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background-color: var(--secondary-2-accent-muted-gold);
+    border-radius: 0 2px 2px 0;
+}
+
+/* ================== NAV DROPDOWN — MOBILE ================== */
+
+@media (max-width: 880px) {
+    /*
+     * The wrapper becomes a flex-column container at full nav width.
+     * Explicit width:100% is needed because the parent nav has
+     * align-items:center (from desktop rule) which would otherwise
+     * shrink-wrap this element. We avoid display:contents because
+     * <button> elements don't blockify reliably across browsers.
+     */
+    .nav-dropdown {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* Hide the desktop hover-bridge pseudo-element */
+    .nav-dropdown::after {
+        display: none;
+    }
+
+    /*
+     * Force the <button> to display:flex (block-level) and replicate
+     * the exact same sizing as every other nav .tab-button.
+     * Specificity (0,1,3,1) beats the base rule (0,1,2,1).
+     */
+    nav#main-nav.mobile-active .nav-dropdown .tab-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - 2rem);
+        margin: 0.5rem auto;
+        box-sizing: border-box;
+    }
+
+    /* When expanded, merge button bottom into the dropdown visually */
+    nav#main-nav.mobile-active .dropdown-toggle[aria-expanded="true"] {
+        margin-bottom: 0;
+        border-radius: 8px 8px 0 0;
+        border-bottom-color: transparent;
+    }
+
+    /*
+     * Disable desktop hover — mobile uses tap/click (.show class).
+     * CRITICAL: override transform+left here because
+     * .nav-dropdown:hover .dropdown-menu has specificity (0,0,3,0)
+     * which beats .dropdown-menu.show (0,0,2,0). On touch devices
+     * tap triggers :hover, so the desktop translateX(-50%) would
+     * win and push the menu off-screen without these overrides.
+     */
+    .nav-dropdown:hover .dropdown-menu {
+        display: none;
+        transform: none;
+        left: auto;
+    }
+    .nav-dropdown:hover .dropdown-menu.show {
+        display: block;
+        opacity: 1;
+        transform: none;
+        left: auto;
+    }
+
+    /*
+     * Dropdown menu: static, centered, same width as the toggle button.
+     */
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        left: auto;
+        width: calc(100% - 2rem);
+        min-width: unset;
+        margin: 0 auto;
+        border-radius: 0 0 8px 8px;
+        padding: 0;
+        border: 1px solid rgba(244, 247, 247, 0.5);
+        border-top: none;
+        box-shadow: none;
+        background-color: rgba(0, 80, 92, 0.5);
+    }
+
+    .dropdown-menu::before {
+        display: none;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+        opacity: 1;
+        transform: none;
+    }
+
+    .dropdown-item {
+        padding: 0.85rem 1.5rem;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown-item:hover {
+        padding-left: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .dropdown-item.active {
+        color: var(--secondary-2-accent-muted-gold);
+    }
+
+    .dropdown-item.active::before {
+        display: none;
     }
 }

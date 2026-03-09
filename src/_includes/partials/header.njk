@@ -3,8 +3,33 @@
     <a href="/" aria-label="Go to homepage"><img src="header_logo.png" alt="{{ site.name }} Logo" class="header-logo" width="400" height="200"></a>
     <nav id="main-nav" role="navigation" aria-label="Main navigation">
       {% for item in navigation %}
-        {% set isActive = (navKey == item.key) %}
-        <a href="{{ item.href }}" class="tab-button{% if isActive %} active{% endif %}" {% if isActive %}aria-current="page"{% endif %}>{{ item.label }}</a>
+        {% if not item.hidden %}
+          {% if item.children %}
+            {# Check if any visible child is the active page #}
+            {% set dropdownActive = false %}
+            {% for child in item.children %}
+              {% if not child.hidden and navKey == child.key %}
+                {% set dropdownActive = true %}
+              {% endif %}
+            {% endfor %}
+            <div class="nav-dropdown">
+              <button class="tab-button dropdown-toggle{% if dropdownActive %} active{% endif %}" aria-expanded="false" aria-haspopup="true">
+                {{ item.label }} <span class="dropdown-arrow">&#9662;</span>
+              </button>
+              <div class="dropdown-menu" role="menu">
+                {% for child in item.children %}
+                  {% if not child.hidden %}
+                    {% set isChildActive = (navKey == child.key) %}
+                    <a href="{{ child.href }}" class="dropdown-item{% if isChildActive %} active{% endif %}" role="menuitem" {% if isChildActive %}aria-current="page"{% endif %}>{{ child.label }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            {% set isActive = (navKey == item.key) %}
+            <a href="{{ item.href }}" class="tab-button{% if isActive %} active{% endif %}" {% if isActive %}aria-current="page"{% endif %}>{{ item.label }}</a>
+          {% endif %}
+        {% endif %}
       {% endfor %}
     </nav>
     <a href="/training-services.html#book-consultation" class="top-right-cta">BOOK NOW</a>

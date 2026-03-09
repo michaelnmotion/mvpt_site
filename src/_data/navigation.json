@@ -10,24 +10,36 @@
     "href": "training-services.html"
   },
   {
-    "key": "methodology",
-    "label": "Methodology",
-    "href": "methodology.html"
-  },
-  {
     "key": "results",
     "label": "Results",
     "href": "client-results.html"
   },
   {
-    "key": "scoliosis",
-    "label": "Scoliosis Case Study",
-    "href": "scoliosis.html"
-  },
-  {
-    "key": "about",
-    "label": "About Me",
-    "href": "about.html"
+    "key": "learn-more",
+    "label": "More",
+    "children": [
+      {
+        "key": "methodology",
+        "label": "Methodology",
+        "href": "methodology.html"
+      },
+      {
+        "key": "scoliosis",
+        "label": "Scoliosis Case Study",
+        "href": "scoliosis.html"
+      },
+      {
+        "key": "resources",
+        "label": "Resources",
+        "href": "resources.html",
+        "hidden": true
+      },
+      {
+        "key": "about",
+        "label": "About Me",
+        "href": "about.html"
+      }
+    ]
   },
   {
     "key": "contact",

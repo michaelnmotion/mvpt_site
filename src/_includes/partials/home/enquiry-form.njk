@@ -1,0 +1,32 @@
+<section id="enquiry-form">
+  <h2>Get in Touch</h2>
+  <form action="https://process-form-to-sheet-219396416002.australia-southeast2.run.app" aria-labelledby="enquiry-form-heading" class="enquiry-form" method="post" novalidate role="form">
+    <div class="form-group">
+      <label for="firstName">First Name*</label>
+      <input aria-describedby="firstName-error" aria-required="true" autocomplete="given-name" id="firstName" name="firstName" required type="text"/>
+      <span aria-live="polite" class="error-message" id="firstName-error"></span>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name*</label>
+      <input aria-describedby="lastName-error" aria-required="true" autocomplete="family-name" id="lastName" name="lastName" required type="text"/>
+      <span aria-live="polite" class="error-message" id="lastName-error"></span>
+    </div>
+    <div class="form-group">
+      <label for="emailField1">Email*</label>
+      <input aria-describedby="emailField1-error" aria-required="true" autocomplete="email" id="emailField1" name="email" required type="email"/>
+      <span aria-live="polite" class="error-message" id="emailField1-error"></span>
+    </div>
+    <div class="form-group">
+      <label for="phoneField1">Phone Number*</label>
+      <input aria-describedby="phoneField1-error" aria-required="true" autocomplete="tel" id="phoneField1" name="phone" required type="tel"/>
+      <span aria-live="polite" class="error-message" id="phoneField1-error"></span>
+    </div>
+    <div class="form-group full-width">
+      <label for="messageField1">Your Message<br/><span class="label-description">Tell me a little bit about yourself and what your goals are!</span></label>
+      <textarea aria-describedby="messageField1-help" autocomplete="off" cols="50" id="messageField1" name="message" rows="5"></textarea>
+      <span class="help-text" id="messageField1-help">Optional: Share your fitness goals, any pain or movement issues, and what you hope to achieve.</span>
+    </div>
+    <button aria-describedby="submit-status" type="submit">Submit Enquiry</button>
+    <div aria-live="polite" class="sr-only" id="submit-status"></div>
+  </form>
+</section>

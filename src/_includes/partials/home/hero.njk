@@ -1,0 +1,23 @@
+<section class="mvpt-container mvpt-hero" id="hero">
+  <div>
+    <span class="mvpt-eyebrow">{{ home.hero.eyebrow }}</span>
+    <h1 class="mvpt-hero__title">{{ home.hero.title }}</h1>
+    <p class="mvpt-hero__sublocation">{{ home.hero.sublocation }}</p>
+    <p class="mvpt-hero__lede">{{ home.hero.lede }}</p>
+    <div class="mvpt-hero__actions">
+      <a href="{{ home.hero.primaryCta.href }}" class="mvpt-btn mvpt-btn--solid mvpt-btn--lg">{{ home.hero.primaryCta.label }}</a>
+      <a href="{{ home.hero.secondaryCta.href }}" class="mvpt-btn mvpt-btn--lg">{{ home.hero.secondaryCta.label }}</a>
+    </div>
+    <ul class="mvpt-hero__marks">
+      {% for mark in home.hero.marks %}
+      <li>{{ mark }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="mvpt-hero__media">
+    <video autoplay loop muted playsinline poster="hero_page.jpg" width="1920" height="1080" aria-label="Michael demonstrating Functional Patterns movement">
+      <source src="hero_page.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>

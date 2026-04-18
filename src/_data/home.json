@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "eyebrow": "root-cause movement · for chronic pain",
+    "title": "Stop managing the pain. Resolve it at the source.",
+    "sublocation": "Melbourne · Malvern East · Online worldwide",
+    "lede": "A 90-minute initial consultation and detailed movement instruction that goes beyond conventional PT, corrective-exercise, and mobility work — trained through Functional Patterns.",
+    "primaryCta": {
+      "label": "Book initial consultation →",
+      "href": "/training-services.html#book-consultation"
+    },
+    "secondaryCta": {
+      "label": "How it works",
+      "href": "#methodology"
+    },
+    "marks": [
+      "90-min consultation",
+      "Movement screen",
+      "No lock-in"
+    ]
+  },
+  "stats": [
+    {
+      "num": "HBS 1",
+      "label": "Functional Patterns · Human Biomechanics Specialist L1"
+    },
+    {
+      "num": "HFP",
+      "label": "Human Foundations Practitioner · Functional Patterns"
+    },
+    {
+      "num": "2 yrs",
+      "label": "Coaching & consultation practice"
+    },
+    {
+      "num": "4 yrs",
+      "label": "Resolving my own body & chronic pain first-hand"
+    }
+  ],
+  "steps": {
+    "label": "what happens in your first consultation",
+    "title": "Three steps. Movement detail other methodologies miss.",
+    "items": [
+      {
+        "num": "1",
+        "title": "Intake & history",
+        "body": "Where it hurts, what's been tried, what you want to get back to — work, sport, picking up your kid."
+      },
+      {
+        "num": "2",
+        "title": "Biomechanical screen",
+        "body": "A Functional Patterns postural & gait assessment to identify the compensations driving your pain — not just where you feel it."
+      },
+      {
+        "num": "3",
+        "title": "Detailed movement instruction",
+        "body": "Hands-on cueing and corrective work at a level of detail conventional PT, corrective exercise, and mobility routines don't reach. You leave knowing exactly how to move."
+      }
+    ]
+  },
+  "ctaBand": {
+    "title": "Let's find out what's actually driving it.",
+    "sub": "Initial consultation · 90 mins · in-studio Malvern East or online",
+    "cta": {
+      "label": "Send an enquiry →",
+      "href": "#enquiry-form"
+    }
+  }
+}

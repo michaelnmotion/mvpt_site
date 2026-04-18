@@ -1,0 +1,15 @@
+<section class="mvpt-container mvpt-steps" id="methodology">
+  <span class="mvpt-section-label">{{ home.steps.label }}</span>
+  <h2 class="mvpt-steps__title">{{ home.steps.title }}</h2>
+  <div class="mvpt-steps__grid">
+    {% for step in home.steps.items %}
+    <article class="mvpt-step">
+      <div class="mvpt-step__num">{{ step.num }}</div>
+      <div class="mvpt-step__body">
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.body }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>

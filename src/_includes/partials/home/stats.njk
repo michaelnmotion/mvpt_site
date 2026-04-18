@@ -1,0 +1,10 @@
+<section class="mvpt-container mvpt-stats-wrap" id="credentials" aria-label="Credentials">
+  <div class="mvpt-stats">
+    {% for stat in home.stats %}
+    <div class="mvpt-stat">
+      <span class="mvpt-stat__num">{{ stat.num }}</span>
+      <span class="mvpt-stat__label">{{ stat.label }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>

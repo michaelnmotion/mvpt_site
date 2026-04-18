@@ -741,7 +741,7 @@ body > footer .footer-disclaimer {
     z-index: 10;
     font-size: 15px;
   }
-  body > header #main-nav.open { display: flex; }
+  body > header #main-nav.mobile-active { display: flex; }
   body > header .nav-dropdown { width: 100%; }
   body > header #main-nav .dropdown-menu {
     position: static;

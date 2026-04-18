@@ -2470,3 +2470,26 @@ button:focus:not(:focus-visible) {
         display: none;
     }
 }
+
+.waitlist-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: rgb(0, 105, 120);
+    color: #ffffff;
+    text-decoration: none;
+    border: 0;
+    border-radius: 4px;
+    font-family: "Google Sans Text", "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 13.3333px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    text-transform: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.waitlist-button:hover {
+    background-color: #00505c;
+    color: #ffffff;
+}

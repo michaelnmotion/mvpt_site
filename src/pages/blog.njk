@@ -21,20 +21,51 @@ permalink: "blog.html"
   </p>
 </section>
 
-<section class="mvpt-container mvpt-blog-list">
-  <div class="mvpt-blog-grid">
-    {% for post in posts %}
-      <a href="{{ post.slug }}" class="mvpt-blog-card">
+{% if posts and posts.length > 0 %}
+  {% set featured = posts[0] %}
+
+  <section class="mvpt-container mvpt-blog-feature-wrap">
+    <a href="{{ featured.slug }}" class="mvpt-blog-feature">
+      <div class="mvpt-blog-feature__media">
+        <img src="{{ featured.image }}" alt="{{ featured.imageAlt | default('') }}" loading="lazy">
+        {% if featured.placeholder %}<span class="mvpt-blog-feature__flag">Placeholder post</span>{% endif %}
+      </div>
+      <div class="mvpt-blog-feature__body">
         <div class="mvpt-blog-card__meta">
-          {% if post.tag %}<span class="mvpt-blog-card__tag">{{ post.tag }}</span>{% endif %}
-          {% if post.dateLabel %}<span class="mvpt-blog-card__date">{{ post.dateLabel }}</span>{% endif %}
+          {% if featured.tag %}<span class="mvpt-blog-card__tag">{{ featured.tag }}</span>{% endif %}
+          {% if featured.dateLabel %}<span class="mvpt-blog-card__date">{{ featured.dateLabel }}</span>{% endif %}
+          {% if featured.readTime %}<span class="mvpt-blog-card__date">{{ featured.readTime }}</span>{% endif %}
         </div>
-        <h3 class="mvpt-blog-card__title">{{ post.title }}</h3>
-        <p class="mvpt-blog-card__excerpt">{{ post.excerpt }}</p>
-        <span class="mvpt-blog-card__cta">Read article →</span>
-      </a>
-    {% endfor %}
-  </div>
-</section>
+        <h3 class="mvpt-blog-feature__title">{{ featured.title }}</h3>
+        {% if featured.subtitle %}<p class="mvpt-blog-feature__subtitle">{{ featured.subtitle | safe }}</p>{% endif %}
+        <p class="mvpt-blog-feature__excerpt">{{ featured.excerpt }}</p>
+        <span class="mvpt-blog-feature__cta">Read the article →</span>
+      </div>
+    </a>
+  </section>
+
+  {% if posts.length > 1 %}
+    <section class="mvpt-container mvpt-blog-list">
+      <div class="mvpt-blog-grid">
+        {% for post in posts %}{% if not loop.first %}
+          <a href="{{ post.slug }}" class="mvpt-blog-card">
+            <div class="mvpt-blog-card__media">
+              <img src="{{ post.image }}" alt="{{ post.imageAlt | default('') }}" loading="lazy">
+            </div>
+            <div class="mvpt-blog-card__body">
+              <div class="mvpt-blog-card__meta">
+                {% if post.tag %}<span class="mvpt-blog-card__tag">{{ post.tag }}</span>{% endif %}
+                {% if post.dateLabel %}<span class="mvpt-blog-card__date">{{ post.dateLabel }}</span>{% endif %}
+              </div>
+              <h3 class="mvpt-blog-card__title">{{ post.title }}</h3>
+              <p class="mvpt-blog-card__excerpt">{{ post.excerpt }}</p>
+              <span class="mvpt-blog-card__cta">Read article →</span>
+            </div>
+          </a>
+        {% endif %}{% endfor %}
+      </div>
+    </section>
+  {% endif %}
+{% endif %}
 
 </div>

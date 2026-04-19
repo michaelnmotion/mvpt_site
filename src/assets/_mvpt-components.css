@@ -217,6 +217,8 @@ body button[type="submit"]::before { display: none !important; }
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
+  box-sizing: border-box;
+  max-width: 100%;
   transition: background .15s ease, color .15s ease, transform .05s ease;
 }
 .mvpt-btn:hover { background: var(--accent); color: var(--paper); }
@@ -1423,7 +1425,7 @@ body > footer .footer-disclaimer {
 @media (max-width: 640px) {
   :root { --container-pad: 20px; }
   .promo-bar { font-size: 10.5px; padding: 8px 16px; letter-spacing: 0.06em; }
-  body > header .header-logo { height: 30px; }
+  body > header .header-logo { height: 38px; }
 
   .mvpt-hero { padding: 36px 0 40px; gap: 28px; }
   .mvpt-hero__title { font-size: 32px; letter-spacing: -0.02em; line-height: 1.08; }

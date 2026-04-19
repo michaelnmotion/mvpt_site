@@ -11,5 +11,5 @@ const ENABLED = true;
 
 module.exports = {
   enabled: ENABLED,
-  showOnAllPages: false
+  showOnAllPages: true
 };

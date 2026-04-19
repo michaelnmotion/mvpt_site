@@ -11,6 +11,27 @@ main {
   max-width: var(--container-max);
 }
 
+/* Anchor scroll offset — clear the fixed header + promo banner so the
+   #book-consultation h2 lands just below them, with the offer box
+   visible in the viewport immediately. Overrides the 80px rule in
+   styles.css which assumed no promo banner. */
+#book-consultation { scroll-margin-top: 120px; }
+
+/* ----- Image rounding: unified 6px across content images -----
+   Keeps content media visually consistent (Studio photo, FP training
+   environment, HBS1 course photo, hero). Legacy styles used 12px;
+   client before/after carousels are intentionally left at their own
+   radius since they live inside their own chrome. */
+#studio img#studio-image,
+.fp-environment-img,
+.my-story-photo {
+  border-radius: 6px !important;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.mvpt-hero__media { border-radius: 6px; }
+
 /* ----- Sitewide section reset -----
    The legacy `section { ... }` rule in styles.css paints every section
    as a white card with border-radius, shadow, hover lift, and a gold
@@ -67,7 +88,7 @@ main {
 }
 
 /* First and last section spacing */
-.tab-content > section:first-of-type { padding-top: 48px; }
+.tab-content > section:first-of-type { padding-top: 28px; }
 .tab-content > section:last-of-type { padding-bottom: 48px; }
 
 /* Consistent body copy inside reset sections — readable default */
@@ -77,7 +98,6 @@ main {
   line-height: 1.65;
   color: var(--ink-soft);
   margin: 0 0 14px;
-  max-width: 72ch;
 }
 .tab-content > section p strong { color: var(--ink); font-weight: 600; }
 .tab-content > section a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
@@ -112,11 +132,15 @@ main {
 /* ----- Legacy button override -----
    styles.css paints .cta-button and button[type=submit] with a
    gold→gold gradient and teal text. After our token remap gold = teal,
-   which makes text disappear against the (now also teal) pill. Force
-   every legacy CTA to a readable paper-on-teal pill that matches the
-   new .mvpt-btn--solid. */
+   which makes text disappear against the (now also teal) pill.
+   Separately, the sitewide `.tab-content > section a` rule forces
+   every anchor inside a section to teal + underline — which also
+   breaks anchor-styled buttons like .mvpt-btn--solid and .waitlist-button.
+   Force every legacy CTA / solid button to a readable paper-on-teal pill. */
 .cta-button,
-body button[type="submit"] {
+body button[type="submit"],
+.tab-content > section a.mvpt-btn--solid,
+.tab-content > section a.cta-button {
   background: var(--accent) !important;
   background-image: none !important;
   color: var(--paper) !important;
@@ -133,7 +157,9 @@ body button[type="submit"] {
   transition: background .15s ease, border-color .15s ease, color .15s ease, transform .05s ease !important;
 }
 .cta-button:hover,
-body button[type="submit"]:hover {
+body button[type="submit"]:hover,
+.tab-content > section a.mvpt-btn--solid:hover,
+.tab-content > section a.cta-button:hover {
   background: var(--accent-dark) !important;
   border-color: var(--accent-dark) !important;
   color: var(--paper) !important;
@@ -142,6 +168,36 @@ body button[type="submit"]:hover {
 }
 .cta-button::before,
 body button[type="submit"]::before { display: none !important; }
+
+/* Waitlist button — matches the Google Calendar "Book a Discovery Call"
+   button exactly (the scheduling script renders a small rectangular
+   Google-Sans button). Mirror its dimensions so they read as a set. */
+.tab-content > section a.waitlist-button,
+.waitlist-button {
+  display: inline-block !important;
+  background: var(--accent) !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  padding: 8px 16px !important;
+  font-family: "Google Sans Text", "Google Sans", Roboto, Arial, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 13.3333px !important;
+  line-height: 20px !important;
+  letter-spacing: 0.25px !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: background .15s ease !important;
+}
+.tab-content > section a.waitlist-button:hover,
+.waitlist-button:hover {
+  background: var(--accent-dark) !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
 
 /* ----- Buttons ----- */
 .mvpt-btn {
@@ -188,10 +244,20 @@ body button[type="submit"]::before { display: none !important; }
   gap: 12px;
   border: 0;
 }
-.promo-bar .promo-message { display: inline; }
+.promo-bar .promo-message {
+  display: inline;
+  color: var(--paper);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity .15s ease;
+}
+.promo-bar .promo-message:hover { opacity: 0.85; text-decoration: underline; text-underline-offset: 2px; }
 .promo-bar .promo-message strong {
   color: var(--paper);
-  font-weight: 500;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
 }
 .promo-bar .close-promo {
   background: none;
@@ -258,16 +324,24 @@ body > header #main-nav .tab-button:hover,
 body > header #main-nav .dropdown-toggle:hover,
 body > header #main-nav .tab-button.active,
 body > header #main-nav .dropdown-toggle.active { color: var(--paper); }
-body > header #main-nav .tab-button.active::after,
-body > header #main-nav .dropdown-toggle.active::after {
+/* Neutralize legacy ::after (width:0; left:50%; translateX(-50%)) on all nav buttons,
+   then draw a clean centered underline on the active one. */
+body > header #main-nav .tab-button::after,
+body > header #main-nav .dropdown-toggle::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 50%;
   bottom: -6px;
+  width: 0;
   height: 2px;
   background: var(--paper);
   border-radius: 2px;
+  transform: translateX(-50%);
+  transition: width .15s ease;
+}
+body > header #main-nav .tab-button.active::after,
+body > header #main-nav .dropdown-toggle.active::after {
+  width: 100%;
 }
 body > header #main-nav .nav-dropdown {
   position: relative;
@@ -567,6 +641,16 @@ body > footer .footer-disclaimer {
   color: var(--ink-soft);
   margin: 0;
 }
+.mvpt-step__body .mvpt-step__note {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(26, 26, 26, 0.14);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  color: var(--accent);
+}
 
 /* ============================================
    Homepage: CTA band
@@ -616,7 +700,6 @@ body > footer .footer-disclaimer {
   font-size: 16px;
   line-height: 1.6;
   color: var(--ink-soft);
-  max-width: 70ch;
 }
 #training-home p strong { color: var(--ink); font-weight: 600; }
 
@@ -629,7 +712,6 @@ body > footer .footer-disclaimer {
 #results-preview .results-preview-intro {
   font-size: 16px;
   color: var(--ink-soft);
-  max-width: 60ch;
   margin: 0 0 32px;
 }
 #results-preview .rc-card {
@@ -677,10 +759,18 @@ body > footer .footer-disclaimer {
   letter-spacing: -0.02em;
   margin: 0 0 32px;
 }
+/* Kill the legacy white card wrapper around the testimonial slider — it clashes
+   with the new section reset. Carousel sits directly on the paper bg. */
+#testimonials-home .testimonial-carousel-container {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
 #testimonials-home .testimonial-slider li {
-  background: var(--paper);
-  border: 1px solid rgba(26, 26, 26, 0.14);
-  border-radius: 4px;
+  background: var(--paper) !important;
+  border: 1px solid rgba(26, 26, 26, 0.14) !important;
+  border-radius: 4px !important;
 }
 #testimonials-home .testimonial-text {
   font-family: var(--font-body);
@@ -767,7 +857,6 @@ body > footer .footer-disclaimer {
   font-size: 15px;
   line-height: 1.6;
   color: var(--ink-soft);
-  max-width: 70ch;
   margin-top: 24px;
 }
 
@@ -819,6 +908,345 @@ body > footer .footer-disclaimer {
 #enquiry-form button[type="submit"]:hover {
   background: var(--accent-dark);
   border-color: var(--accent-dark);
+}
+
+/* ============================================
+   Training-services: services-steps wrapper
+   (uses homepage .mvpt-steps__grid / .mvpt-step)
+   ============================================ */
+.mvpt-services-steps { padding-top: 28px; padding-bottom: 8px; }
+
+/* ============================================
+   Training-services: what's-included list
+   Icon + label + short description, 2-col grid.
+   ============================================ */
+.mvpt-service-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 8px 0 0 !important;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.tab-content > section .mvpt-service-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border: 1px solid rgba(26, 26, 26, 0.14);
+  border-radius: 4px;
+  background: var(--paper);
+  margin: 0;
+  transition: border-color .15s ease;
+}
+.tab-content > section .mvpt-service-list li:hover { border-color: var(--accent); }
+.mvpt-service-list__icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  background: rgba(0, 105, 120, 0.08);
+  border-radius: 6px;
+}
+.tab-content > section .mvpt-service-list li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.tab-content > section .mvpt-service-list li strong {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.tab-content > section .mvpt-service-list li span {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* ============================================
+   Training-services: prominent offer panel
+   Full teal card so the discount is impossible
+   to miss, with a mono "limited time" eyebrow,
+   display-font headline, and a strike-through
+   price line below.
+   ============================================ */
+.tab-content > section .offer-box {
+  background: var(--accent) !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  padding: 22px 26px !important;
+  margin: 20px 0 28px !important;
+  text-align: left !important;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 8px 22px rgba(0, 105, 120, 0.18);
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+/* Subtle corner flash to give the panel a bit more energy */
+.tab-content > section .offer-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 90% 0%, rgba(250, 248, 244, 0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+.tab-content > section .offer-box > * { position: relative; }
+.tab-content > section .offer-box p {
+  margin: 0 !important;
+  font-family: var(--font-body) !important;
+  line-height: 1.5 !important;
+  max-width: none !important;
+}
+.tab-content > section .offer-box .offer-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  color: rgba(250, 248, 244, 0.78) !important;
+  margin: 0 0 8px !important;
+}
+.tab-content > section .offer-box .offer-box__headline {
+  font-family: var(--font-display) !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+  color: var(--paper) !important;
+  margin: 0 !important;
+}
+.tab-content > section .offer-box .offer-box__price {
+  font-size: 15px !important;
+  color: rgba(250, 248, 244, 0.9) !important;
+  margin: 10px 0 0 !important;
+}
+.tab-content > section .offer-box del {
+  color: rgba(250, 248, 244, 0.55) !important;
+  font-size: 14px !important;
+  margin-right: 8px !important;
+}
+.tab-content > section .offer-box .sale-price {
+  color: var(--paper) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em !important;
+}
+.tab-content > section .offer-box strong { color: var(--paper) !important; }
+
+/* ============================================
+   Training-services: under-25 support band
+   Subtle paper-2 panel with teal left accent.
+   ============================================ */
+.tab-content > section.mvpt-note-band {
+  background: var(--paper-2);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 32px 36px;
+  margin: 16px auto 0;
+}
+.tab-content > section.mvpt-note-band > h2:first-child::before,
+.tab-content > section.mvpt-note-band h2::before { content: none !important; }
+.tab-content > section.mvpt-note-band .mvpt-note-band__inner {
+  max-width: 640px;
+}
+.tab-content > section.mvpt-note-band h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 14px;
+  padding-top: 0;
+}
+.tab-content > section.mvpt-note-band p {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 20px !important;
+}
+.tab-content > section.mvpt-note-band .mvpt-btn--solid {
+  text-decoration: none !important;
+}
+
+/* ============================================
+   Client-results: restore teal panels after the
+   sitewide section reset stripped their bg.
+   ============================================ */
+
+/* Results hero — teal panel, light text */
+.tab-content > section.results-hero {
+  background: var(--accent);
+  color: var(--paper);
+  border-radius: 6px;
+  padding: 40px var(--container-pad);
+  overflow: hidden;
+}
+.tab-content > section.results-hero > h2:first-child::before,
+.tab-content > section.results-hero h2::before { content: none !important; }
+.tab-content > section.results-hero h2 {
+  color: var(--paper) !important;
+  font-family: var(--font-display);
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  text-align: center;
+}
+.tab-content > section.results-hero p {
+  color: rgba(250, 248, 244, 0.78) !important;
+  max-width: 560px;
+  margin: 0 auto 22px !important;
+  text-align: center;
+}
+.tab-content > section.results-hero p strong { color: var(--paper) !important; }
+.tab-content > section.results-hero .results-hero-tag {
+  display: inline-block;
+  background: rgba(250, 248, 244, 0.08);
+  border: 1px solid rgba(250, 248, 244, 0.2);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+.tab-content > section.results-hero .results-hero-inner {
+  text-align: center;
+  padding: 0;
+}
+.tab-content > section.results-hero .stat-number {
+  color: var(--paper) !important;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+}
+.tab-content > section.results-hero .stat-label {
+  color: rgba(250, 248, 244, 0.6) !important;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+.tab-content > section.results-hero .stat-divider {
+  background: rgba(250, 248, 244, 0.2);
+}
+
+/* Instagram showcase — teal panel, readable light text */
+.tab-content > section.ig-showcase {
+  background: var(--accent);
+  color: var(--paper);
+  border-radius: 6px;
+  padding: 0;
+  overflow: hidden;
+}
+.tab-content > section.ig-showcase .ig-showcase-inner {
+  padding: 36px 40px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  justify-content: center;
+}
+.tab-content > section.ig-showcase .ig-showcase-content { flex: 1; min-width: 0; max-width: 440px; }
+.tab-content > section.ig-showcase .ig-showcase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(250, 248, 244, 0.08);
+  border: 1px solid rgba(250, 248, 244, 0.2);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+  text-decoration: none;
+  transition: background .15s ease;
+}
+.tab-content > section.ig-showcase .ig-showcase-badge:hover {
+  background: rgba(250, 248, 244, 0.14);
+  color: var(--paper);
+}
+.tab-content > section.ig-showcase h3 {
+  color: var(--paper) !important;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+.tab-content > section.ig-showcase p {
+  color: rgba(250, 248, 244, 0.78) !important;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 22px !important;
+  max-width: 360px;
+}
+.tab-content > section.ig-showcase .ig-showcase-follow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: var(--paper);
+  border: 1.6px solid var(--paper);
+  border-radius: 24px;
+  color: var(--accent) !important;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: background .15s ease, color .15s ease;
+  letter-spacing: 0;
+}
+.tab-content > section.ig-showcase .ig-showcase-follow:hover {
+  background: var(--accent-dark);
+  color: var(--paper) !important;
+  border-color: var(--accent-dark);
+  transform: none;
+  box-shadow: none;
+}
+.tab-content > section.ig-showcase .ig-showcase-video {
+  flex-shrink: 0;
+  width: 260px;
+}
+.tab-content > section.ig-showcase .ig-showcase-video video {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+.tab-content > section.ig-showcase .ig-showcase-video-link {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 244, 0.7) !important;
+  text-decoration: none !important;
+}
+.tab-content > section.ig-showcase .ig-showcase-video-link:hover {
+  color: var(--paper) !important;
 }
 
 /* ============================================
@@ -973,6 +1401,23 @@ body > footer .footer-disclaimer {
     width: auto;
     align-self: flex-start;
   }
+
+  /* Training-services: service list stacks on tablet+mobile */
+  .mvpt-service-list { grid-template-columns: 1fr; gap: 10px; }
+
+  /* Client-results panels — stack */
+  .tab-content > section.ig-showcase .ig-showcase-inner {
+    flex-direction: column;
+    padding: 28px 24px;
+    gap: 24px;
+    text-align: center;
+  }
+  .tab-content > section.ig-showcase .ig-showcase-content { max-width: 100%; }
+  .tab-content > section.ig-showcase p { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .tab-content > section.ig-showcase .ig-showcase-video { width: 220px; }
+  .tab-content > section.results-hero { padding: 32px 24px; }
+  .tab-content > section.results-hero h2 { font-size: 26px; }
+  .tab-content > section.results-hero .results-hero-stats { flex-wrap: wrap; gap: 1rem; }
 }
 
 @media (max-width: 640px) {

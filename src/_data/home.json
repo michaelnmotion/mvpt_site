@@ -3,7 +3,7 @@
     "eyebrow": "root-cause movement · for chronic pain",
     "title": "Stop managing the pain. Resolve it at the source.",
     "sublocation": "Melbourne · Malvern East · Online worldwide",
-    "lede": "A 90-minute initial consultation and detailed movement instruction that goes beyond conventional PT, corrective-exercise, and mobility work — trained through Functional Patterns.",
+    "lede": "A 90-minute <a href=\"/training-services.html#book-consultation\">initial consultation</a> and detailed movement instruction that goes beyond conventional PT, corrective-exercise, and mobility work — trained through Functional Patterns.",
     "primaryCta": {
       "label": "Book initial consultation →",
       "href": "/training-services.html#book-consultation"
@@ -61,8 +61,8 @@
     "title": "Let's find out what's actually driving it.",
     "sub": "Initial consultation · 90 mins · in-studio Malvern East or online",
     "cta": {
-      "label": "Send an enquiry →",
-      "href": "#enquiry-form"
+      "label": "Book now →",
+      "href": "/training-services.html#book-consultation"
     }
   }
 }

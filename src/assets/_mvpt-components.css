@@ -618,20 +618,20 @@ body > footer .footer-disclaimer {
 }
 .mvpt-step:hover { border-color: var(--accent); }
 .mvpt-step__num {
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   background: var(--accent);
   color: var(--paper);
   border-radius: 50%;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 30px;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 105, 120, 0.25);
+  box-shadow: 0 6px 14px rgba(0, 105, 120, 0.32), 0 0 0 4px rgba(0, 105, 120, 0.10);
 }
 .mvpt-step__body h3 {
   font-family: var(--font-display);
@@ -1466,6 +1466,7 @@ body > footer .footer-disclaimer {
 
   .mvpt-steps__title { font-size: 24px; }
   .mvpt-step { padding: 20px; gap: 14px; }
+  .mvpt-step__num { width: 52px; height: 52px; font-size: 24px; }
   .mvpt-step__body h3 { font-size: 16px; }
   .mvpt-step__body p { font-size: 13.5px; }
 

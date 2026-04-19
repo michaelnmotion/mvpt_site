@@ -18,13 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainEl = document.querySelector('main');
 
     function applyPromoOffset() {
+        // Always size main's top padding to the actual fixed-chrome height
+        // (promo + header) so trimming the header padding in CSS automatically
+        // tightens the hero gap — no more hand-synced CSS padding-top values.
+        const headerH = header ? header.offsetHeight : 0;
         if (promoBar && promoBar.classList.contains('enabled')) {
             const promoH = promoBar.offsetHeight;
             if (header) header.style.top = promoH + 'px';
-            if (mainEl) mainEl.style.paddingTop = (promoH + (header ? header.offsetHeight : 75)) + 'px';
+            if (mainEl) mainEl.style.paddingTop = (promoH + headerH) + 'px';
         } else {
             if (header) header.style.top = '';
-            if (mainEl) mainEl.style.paddingTop = '';
+            if (mainEl) mainEl.style.paddingTop = headerH + 'px';
         }
     }
 

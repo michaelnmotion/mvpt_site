@@ -24,7 +24,7 @@ main {
   border: 0;
   border-radius: 0;
   box-shadow: none;
-  padding: 64px var(--container-pad);
+  padding: 40px var(--container-pad);
   margin: 0 auto;
   max-width: var(--container-max);
   overflow: visible;
@@ -40,15 +40,66 @@ main {
 .tab-content > section h2 {
   color: var(--ink);
   border-bottom: 0;
+  padding-top: 14px;
   padding-bottom: 0;
   margin-top: 0;
+  margin-bottom: 20px;
   font-weight: 600;
   font-family: var(--font-display);
+  font-size: 34px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  position: relative;
+}
+/* Teal accent bar above every section H2 — visual "this is a header" signal */
+.tab-content > section > h2::before,
+.tab-content > section > *:first-child + h2::before,
+.tab-content > section .mvpt-section-label + h2::before { content: none; }
+.tab-content > section > h2:first-child::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
 }
 
 /* First and last section spacing */
-.tab-content > section:first-of-type { padding-top: 72px; }
-.tab-content > section:last-of-type { padding-bottom: 80px; }
+.tab-content > section:first-of-type { padding-top: 48px; }
+.tab-content > section:last-of-type { padding-bottom: 48px; }
+
+/* Consistent body copy inside reset sections — readable default */
+.tab-content > section p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 14px;
+  max-width: 72ch;
+}
+.tab-content > section p strong { color: var(--ink); font-weight: 600; }
+.tab-content > section a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.tab-content > section a:hover { color: var(--accent-dark); }
+
+/* Secondary / support text */
+.tab-content > section figcaption,
+.tab-content > section .label-description,
+.tab-content > section .help-text,
+.tab-content > section .results-preview-intro,
+.tab-content > section .progress-caption {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  opacity: 0.85;
+}
+.tab-content > section figcaption {
+  margin-top: 10px;
+  font-style: normal;
+  text-align: center;
+}
 
 /* ----- Container ----- */
 .mvpt-container {
@@ -57,6 +108,40 @@ main {
   padding: 0 var(--container-pad);
   box-sizing: border-box;
 }
+
+/* ----- Legacy button override -----
+   styles.css paints .cta-button and button[type=submit] with a
+   gold→gold gradient and teal text. After our token remap gold = teal,
+   which makes text disappear against the (now also teal) pill. Force
+   every legacy CTA to a readable paper-on-teal pill that matches the
+   new .mvpt-btn--solid. */
+.cta-button,
+body button[type="submit"] {
+  background: var(--accent) !important;
+  background-image: none !important;
+  color: var(--paper) !important;
+  border: 1.6px solid var(--accent) !important;
+  border-radius: 24px !important;
+  padding: 14px 28px !important;
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: background .15s ease, border-color .15s ease, color .15s ease, transform .05s ease !important;
+}
+.cta-button:hover,
+body button[type="submit"]:hover {
+  background: var(--accent-dark) !important;
+  border-color: var(--accent-dark) !important;
+  color: var(--paper) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.cta-button::before,
+body button[type="submit"]::before { display: none !important; }
 
 /* ----- Buttons ----- */
 .mvpt-btn {
@@ -268,10 +353,10 @@ body > header .burger-menu span {
    Site-wide: Footer
    ============================================ */
 body > footer {
-  background: var(--paper);
-  color: var(--gray);
-  padding: 40px var(--container-pad) 36px;
-  border-top: 1px dashed var(--gray-2);
+  background: var(--accent);
+  color: var(--paper);
+  padding: 44px var(--container-pad) 36px;
+  border-top: 0;
   text-align: center;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -279,36 +364,43 @@ body > footer {
   text-transform: uppercase;
 }
 body > footer .footer-logo {
-  height: 36px;
+  height: 38px;
   width: auto;
-  margin: 0 auto 16px;
+  margin: 0 auto 18px;
   display: block;
-  opacity: 0.85;
+  opacity: 1;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
 }
 body > footer p {
   margin: 4px 0;
-  color: var(--gray);
+  color: rgba(250, 248, 244, 0.78);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  max-width: none;
 }
 body > footer .footer-copyright,
-body > footer .footer-address { color: var(--ink-soft); }
+body > footer .footer-address { color: var(--paper); }
 body > footer .footer-social a {
-  color: var(--accent);
+  color: var(--paper);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   text-transform: none;
   letter-spacing: 0.04em;
+  opacity: 0.9;
 }
-body > footer .footer-social a:hover { color: var(--accent-dark); }
+body > footer .footer-social a:hover { opacity: 1; }
 body > footer .footer-disclaimer {
-  max-width: 600px;
-  margin: 14px auto 0;
+  max-width: 620px;
+  margin: 16px auto 0;
   font-size: 10px;
   text-transform: none;
   letter-spacing: 0.02em;
-  color: var(--gray);
+  color: rgba(250, 248, 244, 0.65);
   line-height: 1.55;
 }
 

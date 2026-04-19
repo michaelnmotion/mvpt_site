@@ -1504,14 +1504,16 @@ body > footer .footer-disclaimer {
 .tab-content > section.mvpt-article__closer { padding: 40px 0 0; background: transparent; }
 .tab-content > section.mvpt-article-cta { padding: 0; background: var(--ink); }
 
-/* Kill legacy h2 teal border-bottom on our custom titles */
-.tab-content > section h2.mvpt-pattern__title,
-.tab-content > section h2.mvpt-article-hero__title {
+/* Kill legacy "section h2 { border-bottom: teal; padding-bottom: 0.8rem }"
+   on our custom titles. Use h2.class to beat legacy specificity. */
+h2.mvpt-pattern__title,
+h2.mvpt-article-hero__title,
+h2.mvpt-article-cta__title,
+.mvpt-article__closer h2,
+.mvpt-article-cta h2 {
   border-bottom: none;
   padding-bottom: 0;
 }
-.mvpt-article__closer h2,
-.mvpt-article-cta h2 { border-bottom: none; padding-bottom: 0; }
 
 /* Intro */
 .mvpt-blog-intro { padding: 72px 32px 24px; text-align: center; }

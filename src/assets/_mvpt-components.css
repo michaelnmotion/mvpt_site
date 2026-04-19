@@ -1976,8 +1976,9 @@ h2.mvpt-article-cta__title,
   gap: 40px;
   align-items: center;
 }
-.mvpt-article-cta .mvpt-section-label { color: var(--accent-soft); }
-.mvpt-article-cta h2 {
+/* Boost specificity to beat ".tab-content > section h2/p { color: ink }" */
+.tab-content > section.mvpt-article-cta .mvpt-section-label { color: var(--accent-soft); }
+.tab-content > section.mvpt-article-cta h2 {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 34px;
@@ -1987,7 +1988,7 @@ h2.mvpt-article-cta__title,
   margin: 0 0 12px;
   max-width: 22ch;
 }
-.mvpt-article-cta p {
+.tab-content > section.mvpt-article-cta p {
   font-size: 16px;
   line-height: 1.55;
   color: rgba(250, 248, 244, 0.82);

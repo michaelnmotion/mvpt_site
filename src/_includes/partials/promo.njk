@@ -1,10 +1,6 @@
 {% if promo.enabled and (promo.showOnAllPages or showPromo) %}
 <div id="promo-bar" class="promo-bar">
-  <span class="promo-message">🎉 LIMITED TIME <span id="promo-month"></span> OFFER: <strong>$50 off</strong> your Initial Consultation! Now just <strong>$149</strong>!</span>
+  <span class="promo-message">$50 off your initial consultation</span>
   <button id="close-promo" class="close-promo" aria-label="Close promo">&times;</button>
 </div>
-<script>
-  document.getElementById('promo-month').textContent =
-    new Date().toLocaleString('en-AU',{month:'long',year:'numeric'}).toUpperCase();
-</script>
 {% endif %}

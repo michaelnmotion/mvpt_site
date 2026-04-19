@@ -21,6 +21,15 @@
 
   --container-max: 1200px;
   --container-pad: 32px;
+
+  /* Override legacy palette from styles.css so every existing usage
+     of --secondary-2-accent-muted-gold / etc. flips to the new palette
+     without editing the 2500-line stylesheet. */
+  --primary-1-deep-teal: #006978;
+  --primary-2-slate-grey: #3a3a3a;
+  --secondary-1-background-neutral: #faf8f4;
+  --secondary-2-accent-muted-gold: #006978;
+  --accent-muted-gold-darker: #00525e;
 }
 
 /* Base typography */

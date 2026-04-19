@@ -1499,6 +1499,10 @@ body > footer .footer-disclaimer {
 /* Override legacy .tab-content > section { background, padding } leaks
    into our custom section blocks (hero, pattern chapters, CTA band). */
 .tab-content > section.mvpt-article-hero { padding: 0; background: var(--ink); }
+.tab-content > section.mvpt-article-hero p.mvpt-article-hero__subtitle {
+  color: var(--paper);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
 .tab-content > section.mvpt-pattern { padding: 40px 0 0; background: transparent; }
 .tab-content > section.mvpt-pattern:first-of-type { padding-top: 24px; }
 .tab-content > section.mvpt-article__closer { padding: 40px 0 0; background: transparent; }

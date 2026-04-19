@@ -11,14 +11,15 @@ main {
   max-width: var(--container-max);
 }
 
-/* ----- Homepage-scoped section reset -----
+/* ----- Sitewide section reset -----
    The legacy `section { ... }` rule in styles.css paints every section
    as a white card with border-radius, shadow, hover lift, and a gold
    gradient bar on hover. That clashes with the new design. Strip it
-   for every direct section inside the homepage tab-content, and let
-   each new partial own its own spacing + container.
+   for every direct section inside any tab-content wrapper (home and
+   inner pages share the same <div class="tab-content"> convention),
+   and let each partial own its own spacing + container.
 */
-.tab-content#home > section {
+.tab-content > section {
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -31,12 +32,12 @@ main {
   transform: none;
   box-sizing: border-box;
 }
-.tab-content#home > section:hover {
+.tab-content > section:hover {
   box-shadow: none;
   transform: none;
 }
-.tab-content#home > section::before { content: none; }
-.tab-content#home > section h2 {
+.tab-content > section::before { content: none; }
+.tab-content > section h2 {
   color: var(--ink);
   border-bottom: 0;
   padding-bottom: 0;
@@ -46,8 +47,8 @@ main {
 }
 
 /* First and last section spacing */
-.tab-content#home > section:first-of-type { padding-top: 72px; }
-.tab-content#home > section:last-of-type { padding-bottom: 80px; }
+.tab-content > section:first-of-type { padding-top: 72px; }
+.tab-content > section:last-of-type { padding-bottom: 80px; }
 
 /* ----- Container ----- */
 .mvpt-container {
@@ -754,10 +755,12 @@ body > footer .footer-disclaimer {
     z-index: 10;
   }
   body > header nav#main-nav.mobile-active .tab-button,
-  body > header nav#main-nav.mobile-active .dropdown-toggle {
+  body > header nav#main-nav.mobile-active .dropdown-toggle,
+  body > header nav#main-nav.mobile-active .nav-dropdown > .tab-button,
+  body > header nav#main-nav.mobile-active .nav-dropdown > .dropdown-toggle {
     display: flex !important;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center !important;
+    justify-content: space-between !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 14px var(--container-pad) !important;
@@ -773,7 +776,7 @@ body > footer .footer-disclaimer {
     text-align: left !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
   }
   body > header nav#main-nav.mobile-active .tab-button::after { display: none !important; }
   body > header nav#main-nav.mobile-active .tab-button:hover,
@@ -874,7 +877,10 @@ body > footer .footer-disclaimer {
     align-items: flex-start;
     padding: 26px 24px;
   }
-  .mvpt-cta-band .mvpt-btn { width: 100%; }
+  .mvpt-cta-band .mvpt-btn {
+    width: auto;
+    align-self: flex-start;
+  }
 }
 
 @media (max-width: 640px) {
@@ -901,5 +907,9 @@ body > footer .footer-disclaimer {
 
   .mvpt-cta-band { padding: 22px 20px; gap: 16px; }
   .mvpt-cta-band__title { font-size: 20px; }
-  .mvpt-cta-band .mvpt-btn { justify-content: center; }
+  .mvpt-cta-band .mvpt-btn {
+    width: 100%;
+    align-self: stretch;
+    justify-content: center;
+  }
 }

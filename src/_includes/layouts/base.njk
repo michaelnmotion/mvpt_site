@@ -52,26 +52,12 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
 
-  <!-- Consolidated Analytics -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-  </script>
-
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','{{ site.gtmId }}');</script>
-
-  <!-- Google Analytics & Ads -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
-  <script>
-    gtag('js', new Date());
-    gtag('config', '{{ site.gaId }}');
-    gtag('config', '{{ site.adsId }}');
-  </script>
 
   <!-- Amplitude Tag -->
   <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script><script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.25.0-min.js.gz"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('efe3f493049ac82fdcc3c931fd850911', {"autocapture":{"elementInteractions":true}});</script>

@@ -1,0 +1,40 @@
+---
+layout: "layouts/base.njk"
+title: "Blog | Michael Vincent PT Melbourne"
+description: "Articles on Functional Patterns, biomechanics, posture, and precise strength training — from Melbourne-based FP specialist Michael Vincent."
+canonical: "https://michaelvincentpt.com.au/blog.html"
+ogTitle: "Blog | Michael Vincent PT Melbourne"
+ogDescription: "Articles on Functional Patterns, biomechanics, posture, and precise strength training — from Melbourne-based FP specialist Michael Vincent."
+ogImage: "https://michaelvincentpt.com.au/Studio_photo.jpg"
+ogUrl: "https://michaelvincentpt.com.au/blog.html"
+navKey: "blog"
+permalink: "blog.html"
+---
+
+<div class="tab-content active" id="blog">
+
+<section class="mvpt-container mvpt-blog-intro">
+  <span class="mvpt-section-label">Blog</span>
+  <h2 class="mvpt-blog-intro__title">Notes on movement, posture &amp; precise training.</h2>
+  <p class="mvpt-blog-intro__lede">
+    Short reads on the Functional Patterns methodology, the four patterns that shape every day, and how we train to rebuild them — written from the studio in Malvern East.
+  </p>
+</section>
+
+<section class="mvpt-container mvpt-blog-list">
+  <div class="mvpt-blog-grid">
+    {% for post in posts %}
+      <a href="{{ post.slug }}" class="mvpt-blog-card">
+        <div class="mvpt-blog-card__meta">
+          {% if post.tag %}<span class="mvpt-blog-card__tag">{{ post.tag }}</span>{% endif %}
+          {% if post.dateLabel %}<span class="mvpt-blog-card__date">{{ post.dateLabel }}</span>{% endif %}
+        </div>
+        <h3 class="mvpt-blog-card__title">{{ post.title }}</h3>
+        <p class="mvpt-blog-card__excerpt">{{ post.excerpt }}</p>
+        <span class="mvpt-blog-card__cta">Read article →</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+</div>

@@ -18,17 +18,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainEl = document.querySelector('main');
 
     function applyPromoOffset() {
-        // Always size main's top padding to the actual fixed-chrome height
-        // (promo + header) so trimming the header padding in CSS automatically
-        // tightens the hero gap — no more hand-synced CSS padding-top values.
+        // Size main's top padding to whatever fixed chrome is above it.
+        // Desktop: header is position:fixed, so main needs padding = header (+ promo if open).
+        // Tablet/mobile (≤960px): header is position:relative (in flow), so it already
+        // takes its own space — main only needs padding for the fixed promo bar when open.
         const headerH = header ? header.offsetHeight : 0;
+        const headerFixed = header
+            ? window.getComputedStyle(header).position === 'fixed'
+            : false;
+        const baseOffset = headerFixed ? headerH : 0;
         if (promoBar && promoBar.classList.contains('enabled')) {
             const promoH = promoBar.offsetHeight;
-            if (header) header.style.top = promoH + 'px';
-            if (mainEl) mainEl.style.paddingTop = (promoH + headerH) + 'px';
+            if (header && headerFixed) header.style.top = promoH + 'px';
+            else if (header) header.style.top = '';
+            if (mainEl) mainEl.style.paddingTop = (promoH + baseOffset) + 'px';
         } else {
             if (header) header.style.top = '';
-            if (mainEl) mainEl.style.paddingTop = headerH + 'px';
+            if (mainEl) {
+                if (baseOffset) mainEl.style.paddingTop = baseOffset + 'px';
+                else mainEl.style.paddingTop = '';
+            }
         }
     }
 

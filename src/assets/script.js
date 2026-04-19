@@ -17,28 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('close-promo');
     const mainEl = document.querySelector('main');
 
-    function applyPromoOffset() {
-        // Size main's top padding to whatever fixed chrome is above it.
-        // Desktop: header is position:fixed, so main needs padding = header (+ promo if open).
-        // Tablet/mobile (≤960px): header is position:relative (in flow), so it already
-        // takes its own space — main only needs padding for the fixed promo bar when open.
-        const headerH = header ? header.offsetHeight : 0;
-        const headerFixed = header
-            ? window.getComputedStyle(header).position === 'fixed'
-            : false;
-        const baseOffset = headerFixed ? headerH : 0;
-        if (promoBar && promoBar.classList.contains('enabled')) {
-            const promoH = promoBar.offsetHeight;
-            if (header && headerFixed) header.style.top = promoH + 'px';
-            else if (header) header.style.top = '';
-            if (mainEl) mainEl.style.paddingTop = (promoH + baseOffset) + 'px';
-        } else {
-            if (header) header.style.top = '';
-            if (mainEl) {
-                if (baseOffset) mainEl.style.paddingTop = baseOffset + 'px';
-                else mainEl.style.paddingTop = '';
-            }
-        }
+    if (mainEl) mainEl.style.paddingTop = '';
+
+    // Expose the promo bar's current rendered height as --promo-h so the
+    // sticky header can offset itself by that amount (and sit below the
+    // promo when scrolled). Falls back to 0 when the promo is hidden.
+    function updatePromoHeightVar() {
+        const h = (promoBar && promoBar.classList.contains('enabled'))
+            ? promoBar.offsetHeight
+            : 0;
+        document.documentElement.style.setProperty('--promo-h', h + 'px');
     }
 
     if (promoBar && closeBtn) {
@@ -49,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         closeBtn.addEventListener('click', () => {
             promoBar.classList.remove('enabled');
             localStorage.setItem('promoClosed', 'true');
-            applyPromoOffset();
+            updatePromoHeightVar();
         });
 
-        applyPromoOffset();
-        window.addEventListener('resize', applyPromoOffset);
+        updatePromoHeightVar();
+        window.addEventListener('resize', updatePromoHeightVar);
     }
 
     // Attach the scroll event listener (now independent of the promo bar)

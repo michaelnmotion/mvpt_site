@@ -1496,6 +1496,23 @@ body > footer .footer-disclaimer {
   color: inherit;
 }
 
+/* Override legacy .tab-content > section { background, padding } leaks
+   into our custom section blocks (hero, pattern chapters, CTA band). */
+.tab-content > section.mvpt-article-hero { padding: 0; background: var(--ink); }
+.tab-content > section.mvpt-pattern { padding: 40px 0 0; background: transparent; }
+.tab-content > section.mvpt-pattern:first-of-type { padding-top: 24px; }
+.tab-content > section.mvpt-article__closer { padding: 40px 0 0; background: transparent; }
+.tab-content > section.mvpt-article-cta { padding: 0; background: var(--ink); }
+
+/* Kill legacy h2 teal border-bottom on our custom titles */
+.tab-content > section h2.mvpt-pattern__title,
+.tab-content > section h2.mvpt-article-hero__title {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.mvpt-article__closer h2,
+.mvpt-article-cta h2 { border-bottom: none; padding-bottom: 0; }
+
 /* Intro */
 .mvpt-blog-intro { padding: 72px 32px 24px; text-align: center; }
 .mvpt-blog-intro .mvpt-section-label { display: inline-block; }
@@ -1717,7 +1734,9 @@ body > footer .footer-disclaimer {
 .mvpt-article-hero__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.55) 60%, rgba(0, 0, 0, 0.78) 100%);
+  background:
+    linear-gradient(95deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.55) 45%, rgba(0, 0, 0, 0.3) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.75) 100%);
 }
 .mvpt-article-hero__inner {
   position: relative;
@@ -1774,15 +1793,17 @@ body > footer .footer-disclaimer {
   color: var(--paper);
   margin: 0 0 16px;
   max-width: 18ch;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
 }
 .mvpt-article-hero__subtitle {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 500;
   font-size: 20px;
-  line-height: 1.35;
-  color: rgba(250, 248, 244, 0.9);
+  line-height: 1.4;
+  color: var(--paper);
   margin: 0;
   max-width: 48ch;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
 
 /* Article body */

@@ -1439,20 +1439,18 @@ body > footer .footer-disclaimer {
   :root { --container-pad: 20px; }
   .promo-bar { font-size: 10.5px; padding: 8px 16px; letter-spacing: 0.06em; }
   body > header .header-logo { height: 38px; }
-  /* Tighten header chrome on mobile — the fixed promo + header stack
-     already consumes ~120px, so trim the padding to claw back space. */
   body > header .header-content-wrapper { padding: 10px var(--container-pad); }
 
-  /* The first section on every page ships with 20px top padding on desktop.
-     On mobile the fixed promo+header stack already provides visual
-     separation, so trim it hard. */
-  .tab-content > section:first-of-type { padding-top: 4px; }
+  /* First section padding-top on mobile. script.js sizes main's
+     padding-top to the exact fixed-chrome height, so this value is the
+     real breathing room below the header. */
+  .tab-content > section:first-of-type { padding-top: 8px; }
 
   /* Booking iframe: Google Calendar content stacks vertically on narrow
      viewports, so give it room to breathe instead of a 700px inner scroll. */
   .booking-iframe { height: 1200px; }
 
-  .mvpt-hero { padding: 4px 0 40px; gap: 28px; }
+  .mvpt-hero { padding: 8px 0 40px; gap: 28px; }
   .mvpt-hero__title { font-size: 32px; letter-spacing: -0.02em; line-height: 1.08; }
   .mvpt-hero__lede { font-size: 15px; margin-bottom: 22px; }
   .mvpt-hero__actions { flex-direction: column; gap: 10px; align-items: stretch; }

@@ -1,11 +1,15 @@
 [
   {
     "slug": "blog-placeholder.html",
-    "title": "Placeholder: The Four Functional Patterns",
-    "excerpt": "Standing, walking, running, throwing — the four patterns that define every human day. Why they matter, and how precise strength training rebuilds them.",
+    "title": "The Four Functional Patterns",
+    "subtitle": "Standing, walking, running &amp; throwing — the four pillars of every human day.",
+    "excerpt": "Almost everything you do reduces to four patterns. When they're well-organised, your day has less friction. When they're compensated, it shows up as pain. Here's what each one is — and how precise strength training rebuilds them.",
     "date": "2026-04-19",
     "dateLabel": "April 2026",
     "readTime": "6 min read",
-    "tag": "Methodology"
+    "tag": "Methodology",
+    "image": "hero_page.jpg",
+    "imageAlt": "Functional Patterns movement training",
+    "placeholder": true
   }
 ]

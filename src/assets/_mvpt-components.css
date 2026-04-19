@@ -1270,7 +1270,7 @@ body > footer .footer-disclaimer {
 @media (max-width: 960px) {
   body > header { position: relative; }
   body > header .header-content-wrapper { padding: 14px var(--container-pad); }
-  body > header .header-logo { height: 34px; }
+  body > header .header-logo { height: 44px; }
   body > header .top-right-cta { display: none; }
   body > header .burger-menu { display: flex; margin-left: auto; }
 

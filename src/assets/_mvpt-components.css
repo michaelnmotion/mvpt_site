@@ -1429,6 +1429,10 @@ body > footer .footer-disclaimer {
   .promo-bar { font-size: 10.5px; padding: 8px 16px; letter-spacing: 0.06em; }
   body > header .header-logo { height: 38px; }
 
+  /* Booking iframe: Google Calendar content stacks vertically on narrow
+     viewports, so give it room to breathe instead of a 700px inner scroll. */
+  .booking-iframe { height: 900px; }
+
   .mvpt-hero { padding: 36px 0 40px; gap: 28px; }
   .mvpt-hero__title { font-size: 32px; letter-spacing: -0.02em; line-height: 1.08; }
   .mvpt-hero__lede { font-size: 15px; margin-bottom: 22px; }

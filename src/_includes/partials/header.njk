@@ -1,6 +1,6 @@
 <header>
   <div class="header-content-wrapper">
-    <a href="/" aria-label="Go to homepage"><img src="header_logo.png" alt="{{ site.name }} Logo" class="header-logo" width="400" height="200"></a>
+    <a href="index.html" aria-label="Go to homepage"><img src="header_logo.png" alt="{{ site.name }} Logo" class="header-logo" width="400" height="200"></a>
     <nav id="main-nav" role="navigation" aria-label="Main navigation">
       {% for item in navigation %}
         {% if not item.hidden %}
@@ -32,7 +32,7 @@
         {% endif %}
       {% endfor %}
     </nav>
-    <a href="/training-services.html#book-consultation" class="top-right-cta">BOOK NOW</a>
+    <a href="training-services.html#book-consultation" class="top-right-cta">BOOK NOW</a>
     <button class="burger-menu" id="burger-menu" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

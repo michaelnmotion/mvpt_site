@@ -9,11 +9,6 @@
 /* ----- Layout baseline: widen main to match new 1200px container ----- */
 main {
   max-width: var(--container-max);
-  /* Sync with the header's existing `top` transition (0.4s ease-in-out) so
-     when the promo bar closes, everything below slides up together instead
-     of the header lifting first while content snaps. script.js drives both
-     header.style.top and main.style.paddingTop from applyPromoOffset(). */
-  transition: padding-top 0.4s ease-in-out;
 }
 
 /* Anchor scroll offset — clear the fixed header + promo banner so the
@@ -245,7 +240,6 @@ body button[type="submit"]::before { display: none !important; }
   padding: 9px 16px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
@@ -253,6 +247,7 @@ body button[type="submit"]::before { display: none !important; }
   box-sizing: border-box;
   max-width: 100vw;
 }
+.promo-bar:not(.enabled) { display: none; }
 .promo-bar .promo-message {
   display: inline;
   color: var(--paper);
@@ -1274,7 +1269,6 @@ body > footer .footer-disclaimer {
    Responsive
    ============================================ */
 @media (max-width: 960px) {
-  body > header { position: relative; }
   body > header .header-content-wrapper { padding: 14px var(--container-pad); }
   body > header .header-logo { height: 44px; }
   body > header .top-right-cta { display: none; }

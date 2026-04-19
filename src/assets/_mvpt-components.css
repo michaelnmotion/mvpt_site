@@ -618,18 +618,20 @@ body > footer .footer-disclaimer {
 }
 .mvpt-step:hover { border-color: var(--accent); }
 .mvpt-step__num {
-  width: 32px;
-  height: 32px;
-  border: 1.4px solid var(--accent);
-  color: var(--accent);
+  width: 44px;
+  height: 44px;
+  background: var(--accent);
+  color: var(--paper);
   border-radius: 50%;
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 105, 120, 0.25);
 }
 .mvpt-step__body h3 {
   font-family: var(--font-display);

@@ -6,6 +6,49 @@
    Loaded after styles.css + _mvpt-tokens.css.
    ============================================ */
 
+/* ----- Layout baseline: widen main to match new 1200px container ----- */
+main {
+  max-width: var(--container-max);
+}
+
+/* ----- Homepage-scoped section reset -----
+   The legacy `section { ... }` rule in styles.css paints every section
+   as a white card with border-radius, shadow, hover lift, and a gold
+   gradient bar on hover. That clashes with the new design. Strip it
+   for every direct section inside the homepage tab-content, and let
+   each new partial own its own spacing + container.
+*/
+.tab-content#home > section {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 64px var(--container-pad);
+  margin: 0 auto;
+  max-width: var(--container-max);
+  overflow: visible;
+  transition: none;
+  transform: none;
+  box-sizing: border-box;
+}
+.tab-content#home > section:hover {
+  box-shadow: none;
+  transform: none;
+}
+.tab-content#home > section::before { content: none; }
+.tab-content#home > section h2 {
+  color: var(--ink);
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+/* First and last section spacing */
+.tab-content#home > section:first-of-type { padding-top: 72px; }
+.tab-content#home > section:last-of-type { padding-bottom: 80px; }
+
 /* ----- Container ----- */
 .mvpt-container {
   max-width: var(--container-max);
@@ -276,7 +319,6 @@ body > footer .footer-disclaimer {
   grid-template-columns: 1.1fr 1fr;
   gap: 56px;
   align-items: center;
-  padding: 88px 0 64px;
 }
 .mvpt-hero__title {
   font-family: var(--font-display);
@@ -345,7 +387,6 @@ body > footer .footer-disclaimer {
 /* ============================================
    Homepage: Stats bar
    ============================================ */
-.mvpt-stats-wrap { padding: 16px 0 72px; }
 .mvpt-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -380,7 +421,6 @@ body > footer .footer-disclaimer {
 /* ============================================
    Homepage: Steps
    ============================================ */
-.mvpt-steps { padding-bottom: 80px; }
 .mvpt-steps__title {
   font-family: var(--font-display);
   font-weight: 600;
@@ -438,7 +478,6 @@ body > footer .footer-disclaimer {
 /* ============================================
    Homepage: CTA band
    ============================================ */
-.mvpt-cta-band-wrap { padding-bottom: 72px; }
 .mvpt-cta-band {
   border: 1.2px solid var(--accent);
   border-radius: 4px;
@@ -472,12 +511,6 @@ body > footer .footer-disclaimer {
    homepage — we replace it with .mvpt-hero. */
 #hero-video-section { display: none; }
 
-#training-home {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 48px var(--container-pad) 72px;
-  background: transparent;
-}
 #training-home h2 {
   font-family: var(--font-display);
   font-size: 34px;
@@ -494,12 +527,6 @@ body > footer .footer-disclaimer {
 }
 #training-home p strong { color: var(--ink); font-weight: 600; }
 
-#results-preview {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 48px var(--container-pad) 72px;
-  background: transparent;
-}
 #results-preview h2 {
   font-family: var(--font-display);
   font-size: 34px;
@@ -551,11 +578,6 @@ body > footer .footer-disclaimer {
   color: var(--paper);
 }
 
-#testimonials-home {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 48px var(--container-pad) 72px;
-}
 #testimonials-home h2 {
   font-family: var(--font-display);
   font-size: 34px;
@@ -590,11 +612,6 @@ body > footer .footer-disclaimer {
   color: var(--paper);
 }
 
-#faq {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 48px var(--container-pad) 72px;
-}
 #faq h2 {
   font-family: var(--font-display);
   font-size: 34px;
@@ -634,11 +651,6 @@ body > footer .footer-disclaimer {
   margin: 0 0 16px;
 }
 
-#my-progress {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 48px var(--container-pad) 72px;
-}
 #my-progress h2 {
   font-family: var(--font-display);
   font-size: 34px;
@@ -666,11 +678,6 @@ body > footer .footer-disclaimer {
   margin-top: 24px;
 }
 
-#enquiry-form {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 48px var(--container-pad) 80px;
-}
 #enquiry-form h2 {
   font-family: var(--font-display);
   font-size: 34px;
@@ -725,47 +732,123 @@ body > footer .footer-disclaimer {
    Responsive
    ============================================ */
 @media (max-width: 960px) {
+  body > header { position: relative; }
   body > header .header-content-wrapper { padding: 14px var(--container-pad); }
   body > header .header-logo { height: 34px; }
-  body > header #main-nav {
-    display: none;
+  body > header .top-right-cta { display: none; }
+  body > header .burger-menu { display: flex; margin-left: auto; }
+
+  /* Mobile nav panel — overrides legacy bordered-boxed pill look */
+  body > header nav#main-nav.mobile-active {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     flex-direction: column;
+    align-items: stretch;
     background: var(--accent);
-    border-top: 1px solid rgba(250, 248, 244, 0.15);
-    padding: 16px var(--container-pad) 20px;
-    gap: 14px;
+    border-top: 1px solid rgba(250, 248, 244, 0.12);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    padding: 4px 0 12px !important;
+    gap: 0 !important;
     z-index: 10;
-    font-size: 15px;
   }
-  body > header #main-nav.mobile-active { display: flex; }
-  body > header .nav-dropdown { width: 100%; }
-  body > header #main-nav .dropdown-menu {
-    position: static;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
+  body > header nav#main-nav.mobile-active .tab-button,
+  body > header nav#main-nav.mobile-active .dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 14px var(--container-pad) !important;
+    font-family: var(--font-body) !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    color: rgba(250, 248, 244, 0.88) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid rgba(250, 248, 244, 0.08) !important;
+    text-align: left !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    box-sizing: border-box;
+  }
+  body > header nav#main-nav.mobile-active .tab-button::after { display: none !important; }
+  body > header nav#main-nav.mobile-active .tab-button:hover,
+  body > header nav#main-nav.mobile-active .tab-button.active,
+  body > header nav#main-nav.mobile-active .dropdown-toggle:hover,
+  body > header nav#main-nav.mobile-active .dropdown-toggle.active {
+    background: var(--accent-dark) !important;
+    color: var(--paper) !important;
+    border-color: rgba(250, 248, 244, 0.08) !important;
+  }
+  body > header nav#main-nav.mobile-active .dropdown-arrow {
+    font-size: 10px;
+    opacity: 0.75;
+    transition: transform .15s ease;
+  }
+  body > header nav#main-nav.mobile-active .dropdown-toggle[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+  body > header nav#main-nav.mobile-active .nav-dropdown {
+    width: 100%;
+    margin: 0 !important;
+  }
+  body > header nav#main-nav.mobile-active .dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+    background: rgba(0, 0, 0, 0.12) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    min-width: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: none;
+  }
+  body > header nav#main-nav.mobile-active .dropdown-menu.show {
+    display: block !important;
+  }
+  body > header nav#main-nav.mobile-active .dropdown-menu .dropdown-item {
+    display: block;
+    padding: 12px calc(var(--container-pad) + 16px);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(250, 248, 244, 0.78);
     background: transparent;
     border: 0;
-    box-shadow: none;
-    padding: 8px 0 0 16px;
-    min-width: 0;
+    border-bottom: 1px solid rgba(250, 248, 244, 0.06);
+    text-transform: none;
+    letter-spacing: 0;
   }
-  body > header #main-nav .dropdown-menu .dropdown-item {
-    color: rgba(250, 248, 244, 0.82);
-    padding: 6px 0;
+  body > header nav#main-nav.mobile-active .dropdown-menu .dropdown-item:last-child {
+    border-bottom: 0;
   }
-  body > header #main-nav .dropdown-menu .dropdown-item:hover,
-  body > header #main-nav #main-nav .dropdown-menu .dropdown-item.active {
+  body > header nav#main-nav.mobile-active .dropdown-menu .dropdown-item.active,
+  body > header nav#main-nav.mobile-active .dropdown-menu .dropdown-item:hover {
     color: var(--paper);
-    background: transparent;
+    background: var(--accent-dark);
   }
-  body > header .top-right-cta { display: none; }
-  body > header .burger-menu { display: flex; margin-left: auto; }
-  body > header { position: relative; }
+  /* Disable desktop hover reveal on touch (tap triggers :hover and
+     would otherwise fight the JS-controlled .show class). */
+  body > header .nav-dropdown:hover .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+  }
+  body > header .nav-dropdown .dropdown-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  /* Burger X state */
+  body > header .burger-menu.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  body > header .burger-menu.open span:nth-child(2) { opacity: 0; }
+  body > header .burger-menu.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  body > header .burger-menu span { transition: transform .15s ease, opacity .15s ease; }
 
   .mvpt-hero {
     grid-template-columns: 1fr;

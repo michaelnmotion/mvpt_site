@@ -245,6 +245,8 @@ body button[type="submit"]::before { display: none !important; }
   justify-content: center;
   gap: 12px;
   border: 0;
+  box-sizing: border-box;
+  max-width: 100vw;
 }
 .promo-bar .promo-message {
   display: inline;

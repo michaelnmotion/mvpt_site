@@ -762,6 +762,12 @@ body > footer .footer-disclaimer {
   font-size: 34px;
   letter-spacing: -0.02em;
   margin: 0 0 32px;
+  /* Kill the legacy white card shell around the heading (rounded top, border,
+     white bg) from styles.css — it clashes with the new paper-bg section reset. */
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
 }
 /* Kill the legacy white card wrapper around the testimonial slider — it clashes
    with the new section reset. Carousel sits directly on the paper bg. */
@@ -1428,12 +1434,21 @@ body > footer .footer-disclaimer {
   :root { --container-pad: 20px; }
   .promo-bar { font-size: 10.5px; padding: 8px 16px; letter-spacing: 0.06em; }
   body > header .header-logo { height: 38px; }
+  /* Tighten header chrome on mobile — the fixed promo + header stack
+     already consumes ~120px, so trim the padding to claw back space. */
+  body > header .header-content-wrapper { padding: 10px var(--container-pad); }
+
+  /* The first section on every page ships with 28px top padding to breathe
+     below the container edge on desktop. On mobile the fixed promo+header
+     stack already provides visual separation, and the 28px reads as dead
+     white space. Collapse it. */
+  .tab-content > section:first-of-type { padding-top: 6px; }
 
   /* Booking iframe: Google Calendar content stacks vertically on narrow
      viewports, so give it room to breathe instead of a 700px inner scroll. */
-  .booking-iframe { height: 900px; }
+  .booking-iframe { height: 1200px; }
 
-  .mvpt-hero { padding: 36px 0 40px; gap: 28px; }
+  .mvpt-hero { padding: 6px 0 40px; gap: 28px; }
   .mvpt-hero__title { font-size: 32px; letter-spacing: -0.02em; line-height: 1.08; }
   .mvpt-hero__lede { font-size: 15px; margin-bottom: 22px; }
   .mvpt-hero__actions { flex-direction: column; gap: 10px; align-items: stretch; }

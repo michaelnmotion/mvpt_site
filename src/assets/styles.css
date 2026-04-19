@@ -890,7 +890,6 @@ footer p {
 
 @media (max-width: 880px) {
     main {
-        padding-top: 70px;
         width: 95%; /* More space on tablets */
     }
     
@@ -1058,7 +1057,6 @@ footer p {
 
 @media (max-width: 480px) {
      main {
-        padding-top: 65px;
         width: 100%;
     }
     .header-content-wrapper {

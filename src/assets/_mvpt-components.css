@@ -762,6 +762,12 @@ body > footer .footer-disclaimer {
   color: var(--paper);
 }
 
+/* styles.css nukes the section padding to 0 (#testimonials-home { padding: 0 }),
+   which puts the H2 flush against the viewport edge — misaligned vs. every other
+   section. Restore the container padding to match the sitewide section reset. */
+#testimonials-home {
+  padding: 40px var(--container-pad);
+}
 #testimonials-home h2 {
   font-family: var(--font-display);
   font-size: 34px;

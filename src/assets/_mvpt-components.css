@@ -93,7 +93,7 @@ main {
 }
 
 /* First and last section spacing */
-.tab-content > section:first-of-type { padding-top: 28px; }
+.tab-content > section:first-of-type { padding-top: 20px; }
 .tab-content > section:last-of-type { padding-bottom: 48px; }
 
 /* Consistent body copy inside reset sections — readable default */
@@ -1443,17 +1443,16 @@ body > footer .footer-disclaimer {
      already consumes ~120px, so trim the padding to claw back space. */
   body > header .header-content-wrapper { padding: 10px var(--container-pad); }
 
-  /* The first section on every page ships with 28px top padding to breathe
-     below the container edge on desktop. On mobile the fixed promo+header
-     stack already provides visual separation, and the 28px reads as dead
-     white space. Collapse it. */
-  .tab-content > section:first-of-type { padding-top: 6px; }
+  /* The first section on every page ships with 20px top padding on desktop.
+     On mobile the fixed promo+header stack already provides visual
+     separation, so trim it hard. */
+  .tab-content > section:first-of-type { padding-top: 4px; }
 
   /* Booking iframe: Google Calendar content stacks vertically on narrow
      viewports, so give it room to breathe instead of a 700px inner scroll. */
   .booking-iframe { height: 1200px; }
 
-  .mvpt-hero { padding: 6px 0 40px; gap: 28px; }
+  .mvpt-hero { padding: 4px 0 40px; gap: 28px; }
   .mvpt-hero__title { font-size: 32px; letter-spacing: -0.02em; line-height: 1.08; }
   .mvpt-hero__lede { font-size: 15px; margin-bottom: 22px; }
   .mvpt-hero__actions { flex-direction: column; gap: 10px; align-items: stretch; }

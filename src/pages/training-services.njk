@@ -12,17 +12,56 @@ permalink: "training-services.html"
 ---
 
 <div class="tab-content active" id="training-services">
-<section id="services-pricing">
-<h2>Getting Started</h2>
-<h3>Initial Consultation</h3>
-<div class="offer-box">
-<p><strong>LIMITED TIME MARCH 2026 OFFER: Get $50 OFF!</strong></p>
-<p><strong>Duration:</strong> 1.5 hours | <strong>Cost:</strong> <del>$199 AUD</del> <strong class="sale-price">$149 AUD</strong></p>
+
+<section class="mvpt-container mvpt-services-steps" id="how-it-works">
+<span class="mvpt-section-label">How it works</span>
+<h2 class="mvpt-steps__title">From first enquiry to ongoing training — three clear steps.</h2>
+<div class="mvpt-steps__grid">
+  <article class="mvpt-step">
+    <div class="mvpt-step__num">1</div>
+    <div class="mvpt-step__body">
+      <h3>Book your initial consultation</h3>
+      <p>Pick a 90-minute slot below or drop me a message. We'll cover your history, movement limitations, pain patterns and what you want to get back to — in detail, no pressure.</p>
+    </div>
+  </article>
+  <article class="mvpt-step">
+    <div class="mvpt-step__num">2</div>
+    <div class="mvpt-step__body">
+      <h3>Full biomechanical screen</h3>
+      <p>A Functional Patterns postural and gait assessment to identify the compensations actually driving your pain — not just where you feel it. You leave with clarity on what's happening and why.</p>
+    </div>
+  </article>
+  <article class="mvpt-step">
+    <div class="mvpt-step__num">3</div>
+    <div class="mvpt-step__body">
+      <h3>Ongoing 1-on-1 training</h3>
+      <p>Detailed hands-on movement instruction, tailored corrective work, and weekly homework. Clients typically train one to three times per week — the more consistent you are, the faster the change.</p>
+      <p class="mvpt-step__note">Different options available if you're financially constrained — just ask.</p>
+    </div>
+  </article>
 </div>
+</section>
+
+<section id="services-pricing">
+<h2 id="book-consultation">Book your initial consultation</h2>
+<div class="offer-box">
+<p class="offer-tag">Limited-time offer &middot; <span id="offer-date"></span> only</p>
+<p class="offer-box__headline">$50 off your initial consultation</p>
+<p class="offer-box__price"><del>$199 AUD</del> <span class="sale-price">$149 AUD</span> &nbsp;&middot;&nbsp; 90-minute session</p>
+</div>
+<script>
+  (function(){
+    var el = document.getElementById('offer-date');
+    if (!el) return;
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var d = new Date();
+    el.textContent = months[d.getMonth()] + ' ' + d.getFullYear();
+  })();
+</script>
 <p>
                     This in-depth session includes a comprehensive discussion of your current health status, movement limitations, and personal goals. I will conduct a thorough <strong>posture analysis</strong> and provide an introduction to fundamental <strong>Myofascial Release</strong> and <strong>Corrective Exercise</strong> principles (time permitting). It serves as the foundational step to thoroughly understand your body's specific requirements.
                 </p>
-<h3 id="book-consultation">Ready to Get Started? Book Your Initial Consultation Below</h3>
+<h3>Ready to Get Started? Book Your Initial Consultation Below</h3>
 <p>
                     Select a time that works for you and take the first step towards moving and feeling better. Simply choose an available slot below to secure your <strong>$149 Initial Consultation</strong>.
                 </p>
@@ -59,28 +98,33 @@ permalink: "training-services.html"
                 </p>
 </section>
 <section id="services-offered">
-<h2>Personal Training Services</h2>
-<p>
-                    My approach is centred on your individual needs. I provide a <strong>personalised approach</strong> to your health and movement, with services meticulously designed to address your unique requirements, helping you overcome limitations and achieve lasting results.
-                </p>
-<p>
-                    Utilising the <strong>Functional Patterns Methodology</strong>, my aim is to address the root causes of dysfunction and pain, rather than merely treating symptoms. I will collaborate with you to build a more <strong>resilient and efficient body</strong>, enabling you to move better and live with reduced discomfort.
-                </p>
-<ul>
-<li><strong>1-on-1 Personal Training Sessions:</strong> Dedicated guidance focused on your progress.</li>
-<li><strong>In-depth Postural Assessments:</strong> A comprehensive look at your body's alignment.</li>
-<li><strong>Gait (Walking/Running) Analysis:</strong> Optimising your natural movement patterns.</li>
-<li><strong>Custom Corrective Exercise Programs:</strong> Targeted exercises for improved function.</li>
-<li><strong>Tailored Seniors Personal Training:</strong> Specialised programs for the needs of older adults.</li>
-<li><strong>Flexible Online Coaching Options:</strong> Support and accountability, wherever you are.</li>
+<h2>What's included</h2>
+<ul class="mvpt-service-list">
+  <li>
+    <span class="mvpt-service-list__icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </span>
+    <div><strong>1-on-1 Personal Training</strong><span>Dedicated guidance focused on your progress, in-studio or online.</span></div>
+  </li>
+  <li>
+    <span class="mvpt-service-list__icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
+    </span>
+    <div><strong>Postural &amp; Gait Analysis</strong><span>Detailed assessment of how you stand, walk and move.</span></div>
+  </li>
+  <li>
+    <span class="mvpt-service-list__icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+    </span>
+    <div><strong>Corrective Exercise Programs</strong><span>Targeted work to address the compensations driving your pain.</span></div>
+  </li>
+  <li>
+    <span class="mvpt-service-list__icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12c0-4 3-7 7-7 2.5 0 4 1.5 4 3.5S13.5 12 11 12c-2 0-3 1.2-3 3 0 1.8 1.3 3 3 3 3 0 6-2 6-5"/><circle cx="17" cy="7" r="2"/></svg>
+    </span>
+    <div><strong>Myofascial Release</strong><span>Hands-on release work to unwind chronic tension in the connective tissue.</span></div>
+  </li>
 </ul>
-<div class="service-highlight">
-<h3>Special Focus: Seniors Personal Training</h3>
-<p>Training is adapted for the unique needs of older adults, focusing on improving balance, strength, and the ease of daily activities based on individual fitness levels, limitations, and goals.</p>
-<div class="personal-note">
-<p><strong>A Personal Note:</strong> I have the privilege of training my own parents. It's been incredibly rewarding to see their progress firsthand as they experience significant improvements in balance, strength, and their overall ease of movement in daily life.</p>
-</div>
-</div>
 </section>
 
 <section id="studio">
@@ -91,19 +135,14 @@ permalink: "training-services.html"
                 </p>
 </section>
 
-<section id="ongoing-training">
-<h2>Ongoing 1-on-1 Training</h2>
-<p>
-                    <strong>Duration:</strong> 1-1.5 hours per session
-                </p>
-<p>
-                    Clients typically train between <strong>one to three times per week</strong>, depending on their goals and availability. Those who train more frequently tend to progress significantly faster and achieve more meaningful results. In all cases, adherence to the homework I prescribe between sessions is hugely beneficial to your progress.
-                </p>
-<p>
-                    In these ongoing sessions, I will continually deepen my understanding of your body and how it moves, allowing me to efficiently address dysfunctions and improve your movement quality over time. Each session builds upon the last, creating a clear path of progression tailored specifically to you.
-                </p>
-<p>
-                    <strong>Training packages are available</strong> and vary based on your level of commitment. Specific details regarding these packages can be discussed during your initial consultation.
-                </p>
+<section id="under-25-support" class="mvpt-note-band">
+  <div class="mvpt-note-band__inner">
+    <span class="mvpt-section-label">Support for younger clients</span>
+    <h2>Under 25 and dealing with a chronic movement issue?</h2>
+    <p>
+      If you're 25 or under, working through a chronic movement or pain condition, and don't already have financial support in place — reach out. I offer discounted sessions in these circumstances because getting this stuff addressed early makes an enormous difference down the line.
+    </p>
+    <a class="mvpt-btn mvpt-btn--solid" href="/contact.html">Get in touch →</a>
+  </div>
 </section>
 </div>

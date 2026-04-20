@@ -24,11 +24,6 @@
         "href": "methodology.html"
       },
       {
-        "key": "blog",
-        "label": "Blog",
-        "href": "blog.html"
-      },
-      {
         "key": "scoliosis",
         "label": "Scoliosis Case Study",
         "href": "scoliosis.html"
@@ -43,6 +38,11 @@
         "key": "about",
         "label": "About Me",
         "href": "about.html"
+      },
+      {
+        "key": "blog",
+        "label": "Blog",
+        "href": "blog.html"
       }
     ]
   },

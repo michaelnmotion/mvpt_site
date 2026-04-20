@@ -28,7 +28,6 @@ permalink: "blog.html"
     <a href="{{ featured.slug }}" class="mvpt-blog-feature">
       <div class="mvpt-blog-feature__media">
         <img src="{{ featured.image }}" alt="{{ featured.imageAlt | default('') }}" loading="lazy">
-        {% if featured.placeholder %}<span class="mvpt-blog-feature__flag">Placeholder post</span>{% endif %}
       </div>
       <div class="mvpt-blog-feature__body">
         <div class="mvpt-blog-card__meta">

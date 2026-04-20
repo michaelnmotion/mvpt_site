@@ -1,0 +1,35 @@
+# Michael Vincent Personal Training
+
+> Functional Patterns certified personal trainer based in Malvern East, Melbourne. Specialises in 1-on-1 training focused on root-cause movement correction — posture, gait, and chronic pain — rather than generic fitness or conventional physiotherapy.
+
+Michael Vincent is a Human Biomechanics Specialist Level 1 (HBS 1) and Human Foundations Practitioner (HFP) certified through [Functional Patterns](https://functionalpatterns.com). Training happens in a private studio in Malvern East (Victoria, Australia) and online worldwide. The approach prioritises the four natural human movement patterns — **standing, walking, running, and throwing** — as the foundation for resolving pain, correcting posture, and moving efficiently. Initial consultations are 90 minutes; ongoing sessions are 1–1.5 hours, typically 1–3 times per week.
+
+## Core pages
+
+- [Home](https://michaelvincentpt.com.au/): Overview of the approach, credentials, testimonials, FAQs, and an enquiry form.
+- [Training services](https://michaelvincentpt.com.au/training-services.html): Three-step onboarding (initial consultation → biomechanical screen → ongoing training), pricing, in-studio and online options, and the Google Calendar booking widget.
+- [Methodology](https://michaelvincentpt.com.au/methodology.html): How the Functional Patterns system works — posture analysis, gait assessment, myofascial release, and corrective exercise.
+- [Client results](https://michaelvincentpt.com.au/client-results.html): Before-and-after posture photos and video showcases of real client transformations.
+- [About](https://michaelvincentpt.com.au/about.html): Michael's personal story — resolving his own chronic pain through Functional Patterns before becoming a practitioner.
+- [Contact](https://michaelvincentpt.com.au/contact.html): Enquiry form, studio location, and direct contact details.
+
+## Blog
+
+- [The First Four: Movements to Prioritise](https://michaelvincentpt.com.au/blog-first-four.html): Why standing, walking, running and throwing are the four pillars of every human day, and how precise strength training rebuilds them.
+- [Blog index](https://michaelvincentpt.com.au/blog.html): All articles on movement, posture, and precise training.
+
+## Specialised topic
+
+- [Scoliosis case study](https://michaelvincentpt.com.au/scoliosis.html): Details on the six-month scoliosis training scholarship and the Functional Patterns approach to scoliosis management.
+
+## Key facts
+
+- **Location:** Malvern East, Victoria, Australia (3145). Serves Melbourne and surrounding suburbs including Carnegie, Caulfield, Glen Huntly, and Ormond. Also offers online coaching worldwide.
+- **Credentials:** Functional Patterns HBS Level 1, HFP Practitioner. 4+ years applying the methodology to his own body, 2+ years practising professionally.
+- **Specialties:** Chronic pain, posture correction, gait mechanics, scoliosis management, seniors training, running biomechanics, injury rehabilitation.
+- **Differentiator:** Unlike conventional PT or generic strength training, the work centres on the four innate human movement patterns (standing, walking, running, throwing) and uses precise myofascial release plus tension-based corrective exercise to rebuild those patterns from the foundation up.
+- **Booking:** Via Google Calendar, embedded on the training services page. Initial consultation is 90 minutes, AUD $199 (currently AUD $149 with a $50 off promotion).
+
+## Optional
+
+- [Sitemap (XML)](https://michaelvincentpt.com.au/sitemap.xml): Machine-readable index of all pages.

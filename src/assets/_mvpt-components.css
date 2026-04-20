@@ -1574,20 +1574,6 @@ h2.mvpt-article-cta__title,
   transition: transform .4s ease;
 }
 .mvpt-blog-feature:hover .mvpt-blog-feature__media img { transform: scale(1.03); }
-.mvpt-blog-feature__flag {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: rgba(26, 26, 26, 0.78);
-  color: var(--paper);
-  padding: 6px 10px;
-  border-radius: 3px;
-  backdrop-filter: blur(4px);
-}
 .mvpt-blog-feature__body {
   padding: 44px 44px;
   display: flex;
@@ -1817,29 +1803,6 @@ h2.mvpt-article-cta__title,
   max-width: 880px;
   margin: 0 auto;
   padding: 56px 32px 24px;
-}
-.mvpt-article__placeholder-note {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 14px;
-  align-items: center;
-  margin: 0 0 32px;
-  padding: 14px 18px;
-  border-left: 3px solid var(--accent);
-  background: rgba(0, 105, 120, 0.06);
-  font-size: 14px;
-  color: var(--ink-soft);
-  border-radius: 0 4px 4px 0;
-}
-.mvpt-article__placeholder-flag {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(0, 105, 120, 0.12);
-  padding: 3px 8px;
-  border-radius: 3px;
 }
 .mvpt-article__lede-block {
   font-size: 17px;

@@ -1,6 +1,6 @@
 [
   {
-    "slug": "blog-placeholder.html",
+    "slug": "blog-first-four.html",
     "title": "The First Four: Movements to Prioritise",
     "subtitle": "Standing, walking, running &amp; throwing — the four pillars of every human day.",
     "excerpt": "Almost everything you do reduces to four patterns. When they're well-organised, your day has less friction. When they're compensated, it shows up as pain. Here's what each one is — and how precise strength training rebuilds them.",
@@ -9,7 +9,6 @@
     "readTime": "2 min read",
     "tag": "Methodology",
     "image": "hero_page.jpg",
-    "imageAlt": "Functional Patterns movement training",
-    "placeholder": true
+    "imageAlt": "Functional Patterns movement training"
   }
 ]

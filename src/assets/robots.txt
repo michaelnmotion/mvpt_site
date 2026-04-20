@@ -1,0 +1,92 @@
+# Michael Vincent Personal Training
+# https://michaelvincentpt.com.au
+# Open to all well-behaved crawlers — traditional search + AI retrieval.
+
+User-agent: *
+Allow: /
+
+# Traditional search engines (explicit allow for clarity)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# AI / LLM retrieval + training — explicitly allowed.
+# This site WANTS to appear in AI answers; these directives make that intent explicit.
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google Gemini / AI Overviews (separate control from Googlebot)
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence (separate control from Applebot)
+User-agent: Applebot-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Meta AI (Llama)
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Amazon (Alexa / Amazon AI)
+User-agent: Amazonbot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl — feeds many LLM training datasets
+User-agent: CCBot
+Allow: /
+
+# ByteDance (TikTok / Doubao)
+User-agent: Bytespider
+Allow: /
+
+# Diffbot (used by many AI tools for structured extraction)
+User-agent: Diffbot
+Allow: /
+
+Sitemap: https://michaelvincentpt.com.au/sitemap.xml

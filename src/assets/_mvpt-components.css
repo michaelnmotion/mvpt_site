@@ -1503,10 +1503,10 @@ body > footer .footer-disclaimer {
   color: var(--paper);
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
 }
-.tab-content > section.mvpt-pattern { padding: 40px 0 0; background: transparent; }
-.tab-content > section.mvpt-pattern:first-of-type { padding-top: 24px; }
-.tab-content > section.mvpt-article__closer { padding: 40px 0 0; background: transparent; }
 .tab-content > section.mvpt-article-cta { padding: 0; background: var(--ink); }
+/* .mvpt-pattern and .mvpt-article__closer live inside <article>, so
+   ".tab-content > section" doesn't match — legacy "section { card look }"
+   applies and we just tweak the inner padding on the classes directly. */
 
 /* Kill legacy "section h2 { border-bottom: teal; padding-bottom: 0.8rem }"
    on our custom titles. Use h2.class to beat legacy specificity. */
@@ -1859,13 +1859,13 @@ h2.mvpt-article-cta__title,
 }
 .mvpt-article__lede-block strong { font-weight: 600; color: var(--ink); }
 
-/* Pattern sections */
+/* Pattern sections — legacy "section { card look }" gives us the
+   rounded box + border. We only need to set proper inner padding. */
 .mvpt-pattern {
-  margin: 48px 0;
-  padding: 40px 0 0;
-  border-top: 1px solid rgba(26, 26, 26, 0.10);
+  margin: 32px 0;
+  padding: 36px 40px 32px;
+  border-top: none;
 }
-.mvpt-pattern:first-of-type { border-top: none; padding-top: 24px; }
 .mvpt-pattern__head {
   display: flex;
   align-items: center;
@@ -1943,9 +1943,9 @@ h2.mvpt-article-cta__title,
 
 /* Article closer */
 .mvpt-article__closer {
-  margin: 56px 0 0;
-  padding: 40px 0 0;
-  border-top: 1px solid rgba(26, 26, 26, 0.10);
+  margin: 40px 0 0;
+  padding: 36px 40px 32px;
+  border-top: none;
 }
 .mvpt-article__closer h2 {
   font-family: var(--font-display);
@@ -2056,7 +2056,7 @@ h2.mvpt-article-cta__title,
   .mvpt-article__lede-block .mvpt-article__lede { font-size: 18px; }
   .mvpt-article__lede-block { font-size: 15.5px; }
 
-  .mvpt-pattern { margin: 36px 0; padding-top: 32px; }
+  .mvpt-pattern { margin: 24px 0; padding: 28px 22px 24px; }
   .mvpt-pattern__head { gap: 14px; }
   .mvpt-pattern__num { width: 52px; height: 52px; font-size: 24px; }
   .mvpt-pattern__title { font-size: 26px; }
@@ -2065,7 +2065,7 @@ h2.mvpt-article-cta__title,
   .mvpt-pattern__col { padding: 18px; }
   .mvpt-pattern__col p { font-size: 14.5px; }
 
-  .mvpt-article__closer { padding-top: 32px; margin-top: 40px; }
+  .mvpt-article__closer { padding: 28px 22px 24px; margin: 32px 0 0; }
   .mvpt-article__closer h2 { font-size: 24px; }
   .mvpt-article__closer p { font-size: 15.5px; }
 

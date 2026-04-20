@@ -85,65 +85,191 @@ The pre-header GTM snippet is critical; events pushed before GTM loads are queue
 
 ## 3. Event catalogue
 
+Each event below includes: **Source** (the exact code pattern in `analytics.js` or `script.js` that performs the `dataLayer.push`), **GTM trigger** (how to wire the Custom Event trigger in GTM), and **Parameters** (the data layer variables carried on the push).
+
+> **Shared GTM trigger template.** Every event here uses the same GTM trigger shape:
+> - **Type:** Custom Event
+> - **Event name:** the literal event string (e.g. `cta_click`)
+> - **This trigger fires on:** All Custom Events
+>
+> Where a filter is worth adding (noise suppression, specific routing), the per-event row calls it out. §5 lists the Data Layer Variables to create once and reuse across tags.
+
 ### 3.1 Conversion path
 
-| Event | Fires when | Parameters |
-|---|---|---|
-| `cta_click` | User clicks any `.cta-button`, `.mvpt-btn--solid`, `.mvpt-btn`, `.top-right-cta`, or `.waitlist-button` | `cta_label` (visible text), `cta_location` (nearest section id), `cta_destination` (href) |
-| `waitlist_click` | Specialised event firing alongside `cta_click` when the waitlist button is clicked | `cta_label` |
-| `booking_view` | The Google Calendar appointment iframe scrolls to ≥30% visible (once per page load) | `booking_type: 'initial_consult'`, `booking_provider: 'google_calendar'` |
-| `discovery_call_click` | Click anywhere inside a `[data-booking-button="discovery_call"]` wrapper — catches the Google-rendered Discovery Call button | `booking_provider: 'google_calendar'` |
+#### `cta_click`
+- **Source:** Delegated click listener on `document` (capture phase). Matches `e.target.closest('.cta-button, .mvpt-btn--solid, .mvpt-btn, .top-right-cta, .waitlist-button')`. Fires on every match — no de-dup.
+- **GTM trigger:** Custom Event, name `cta_click`, All Custom Events. This is your **primary top-of-funnel conversion** — mark as a Key Event in GA4.
+- **Parameters:**
+  - `cta_label` — `textContent` of the button/link, trimmed, whitespace collapsed, capped at 120 chars
+  - `cta_location` — id of the nearest enclosing `<section>` ancestor, or `'unknown'`
+  - `cta_destination` — raw `href` attribute value (may be `#anchor`, path, or full URL)
+- **Filter suggestions:** none — every CTA click is conversion-relevant.
 
-**Note:** `booking_confirmed` is NOT instrumented here. Google Calendar's cross-origin iframe cannot be observed from the parent page, and Google does not emit `postMessage` events. See [Known gaps](#5-known-gaps-and-deliberate-omissions).
+#### `waitlist_click`
+- **Source:** Same delegated listener as `cta_click`. When `target.classList.contains('waitlist-button')`, a second `waitlist_click` is pushed right after the `cta_click`.
+- **GTM trigger:** Custom Event, name `waitlist_click`. Mark as a Key Event — waitlist intent is high-signal.
+- **Parameters:** `cta_label` (same trimmed text as the cta_click)
+- **Note:** Both `cta_click` AND `waitlist_click` fire for a waitlist click. Deduplicate in GA4 reports by filtering `cta_click` where `cta_label CONTAINS 'waitlist'`, or build funnels off `waitlist_click` directly.
+
+#### `booking_view`
+- **Source:** `IntersectionObserver` with `threshold: 0.3` watching every `iframe[src*="calendar.google.com/calendar/appointments"]`. On first intersection ≥30% visible, flips `iframe.__viewed = true` and pushes. One-shot per iframe per page load.
+- **GTM trigger:** Custom Event, name `booking_view`. Mark as a Key Event — strong intent.
+- **Parameters:**
+  - `booking_type: 'initial_consult'`
+  - `booking_provider: 'google_calendar'`
+- **Caveat:** triggered by scroll position, not interaction. Counts "saw the booking widget" not "tried to book." Good for funnel intermediate step.
+
+#### `discovery_call_click`
+- **Source:** Delegated click listener on `document`. Matches `e.target.closest('[data-booking-button="discovery_call"]')`. The wrapper div lives in `training-services.njk`; Google's own button script injects the actual button into that wrapper on page load, so delegation is required.
+- **GTM trigger:** Custom Event, name `discovery_call_click`. Mark as a Key Event.
+- **Parameters:** `booking_provider: 'google_calendar'`
+
+> **`booking_confirmed` is deliberately NOT here.** Google Calendar's iframe is cross-origin and emits no `postMessage`, so the parent page cannot observe the booking completion. To capture actual bookings, you'd need a server-side watcher (Cloud Run + Calendar API `events.watch` → GA4 Measurement Protocol). See [Known gaps](#4-known-gaps-and-deliberate-omissions).
+
+---
 
 ### 3.2 Navigation
 
-| Event | Fires when | Parameters |
-|---|---|---|
-| `nav_click` | Click on any `<a>` inside `<header>` or `<footer>` that isn't also a tracked CTA (to prevent double-counting) | `nav_label`, `nav_location` (`'header' \| 'footer' \| 'mobile-drawer'`), `nav_href` |
-| `mobile_menu_toggle` | Burger menu opens or closes | `menu_action: 'open' \| 'close'` |
-| `dropdown_toggle` | Header dropdown menu opens or closes | `dropdown_label`, `dropdown_action: 'open' \| 'close'` |
+#### `nav_click`
+- **Source:** Delegated click listener on `document` (capture phase). Matches `e.target.closest('a')`, then checks whether that anchor is inside `<header>` or `<footer>`. If the anchor ALSO matches the CTA selector, it returns early (already pushed `cta_click`).
+- **GTM trigger:** Custom Event, name `nav_click`, All Custom Events.
+- **Parameters:**
+  - `nav_label` — anchor text (trimmed, capped 120 chars)
+  - `nav_location` — `'header'`, `'footer'`, or `'mobile-drawer'` (detected via `.closest('#main-nav.mobile-active')`)
+  - `nav_href` — raw `href` attribute value
+- **Note:** the check order means `.top-right-cta` (Book Now button in header) fires `cta_click` only, not `nav_click`. Clean separation of nav-intent vs. conversion-intent traffic.
+
+#### `mobile_menu_toggle`
+- **Source:** Direct click listener on `#burger-menu`. Reads `#main-nav.classList.contains('mobile-active')` on `setTimeout(..., 0)` — this relies on `script.js` having toggled the class synchronously in its own handler first.
+- **GTM trigger:** Custom Event, name `mobile_menu_toggle`, All Custom Events.
+- **Parameters:** `menu_action: 'open' | 'close'`
+- **Coupling warning:** if the burger handler in `script.js` ever becomes async, the `menu_action` value will be wrong (always reading the pre-toggle state).
+
+#### `dropdown_toggle`
+- **Source:** Direct click listener on every `.dropdown-toggle` button (i.e. the "More ▾" button). Reads `btn.getAttribute('aria-expanded')` on `setTimeout(..., 0)` for the same reason as above.
+- **GTM trigger:** Custom Event, name `dropdown_toggle`, All Custom Events.
+- **Parameters:**
+  - `dropdown_label` — button text with trailing ▾/▼ arrow stripped (e.g. `"More"`)
+  - `dropdown_action: 'open' | 'close'`
+- **Filter suggestion:** not Key-Event material. Useful for engagement reports but low-signal alone.
+
+---
 
 ### 3.3 Promo bar
 
-| Event | Fires when | Parameters |
-|---|---|---|
-| `promo_impression` | The promo bar becomes visible (only fires if `localStorage.promoClosed !== 'true'`; fires once per page load) | `promo_id: 'initial_consult_offer'`, `promo_month` (rendered month/year) |
-| `promo_click` | User clicks the promo message anchor | `promo_id`, `promo_month` |
-| `promo_dismiss` | User clicks the close (×) button | `promo_id`, `promo_month` |
+#### `promo_impression`
+- **Source:** `MutationObserver` watching `#promo-bar` for `class` attribute changes. Fires when the bar gains the `.enabled` class (set by `script.js` on DOMContentLoaded only if `localStorage.promoClosed !== 'true'`). Guarded by `bar.__promoTracked` flag — one push per page load. Also runs a check on `DOMContentLoaded` + immediate inline call to catch already-enabled cases.
+- **GTM trigger:** Custom Event, name `promo_impression`, All Custom Events.
+- **Parameters:**
+  - `promo_id: 'initial_consult_offer'` (hard-coded)
+  - `promo_month` — `textContent` of `#promo-date` (e.g. `"APRIL 2026"`)
+- **Tag recommendation:** pair with a GA4 Event tag named `promo_impression` so you can compare impression-vs-dismissal rates and compute CTR (`promo_click / promo_impression`).
+
+#### `promo_click`
+- **Source:** Direct click listener on `#promo-bar .promo-message` (the anchor that wraps the offer text).
+- **GTM trigger:** Custom Event, name `promo_click`, All Custom Events.
+- **Parameters:** `promo_id`, `promo_month`
+- **Note:** also pushes `cta_click` because the promo message anchor matches `.mvpt-btn` selector scope? **No — it doesn't.** Promo message has no CTA class, so no `cta_click`. The user's click-through on the promo is uniquely captured by `promo_click`.
+
+#### `promo_dismiss`
+- **Source:** Direct click listener on `#close-promo` (the × button).
+- **GTM trigger:** Custom Event, name `promo_dismiss`, All Custom Events.
+- **Parameters:** `promo_id`, `promo_month`
+- **Tag recommendation:** compute dismissal rate in GA4 as `promo_dismiss / promo_impression` per `promo_month` to A/B different offer copy.
+
+---
 
 ### 3.4 Engagement
 
-| Event | Fires when | Parameters |
-|---|---|---|
-| `faq_toggle` | An FAQ question is clicked | `faq_question` (visible text), `faq_action: 'open' \| 'close'`, `faq_position` (1-indexed) |
-| `video_play` | Any `<video>` element receives its first `play` event on this page load | `video_src` (filename), `video_location` (section id), `video_autoplay` (boolean) |
-| `video_progress` | Video playback crosses 25%, 50%, 75%, 100% (each fires once per video per page load) | `video_src`, `video_percent`, `video_location` |
-| `carousel_interaction` | User clicks a prev/next button or dot in the home testimonial carousel or any client-results `[data-carousel]` | `carousel_id`, `carousel_action: 'prev' \| 'next' \| 'dot'`, `slide_index` (when applicable) |
-| `scroll_depth` | Page scroll crosses 25%, 50%, 75%, 100% (each fires once per page load) | `percent_depth` |
+#### `faq_toggle`
+- **Source:** Direct click listener on every `.faq-question` button. Reads `btn.getAttribute('aria-expanded')` on `setTimeout(..., 0)` — relies on `script.js` synchronously toggling `aria-expanded` first.
+- **GTM trigger:** Custom Event, name `faq_toggle`, All Custom Events.
+- **Parameters:**
+  - `faq_question` — the inner `<span>` label text (icon-span excluded)
+  - `faq_action: 'open' | 'close'`
+  - `faq_position` — 1-indexed position in the questions list
+- **Report suggestion:** a "FAQ heatmap" table in GA4: Event count grouped by `faq_question` with `faq_action = 'open'` shows which questions actually matter. Questions with 0 opens after significant traffic are candidates to remove.
+
+#### `video_play`
+- **Source:** Direct `play` event listener on every `<video>` element. Guarded by `v.__played` flag — one push per video per page load.
+- **GTM trigger:** Custom Event, name `video_play`, All Custom Events.
+- **Parameters:**
+  - `video_src` — basename of `currentSrc` or first `<source>` (e.g. `"hero_page.mp4"`)
+  - `video_location` — nearest `<section>` id
+  - `video_autoplay` — whether the `<video>` element has the `autoplay` attribute
+- **Filter suggestion:** add a GTM trigger **exception** where `video_autoplay equals true` to suppress autoplay-induced plays from the GA4 event, OR keep the raw event and filter in reports. Autoplay videos inflate `video_play` counts against user intent.
+- **Alternative pattern:** create two GA4 event tags — `video_play_autoplay` (filter `video_autoplay = true`) and `video_play_manual` (filter `video_autoplay = false`) — so you can look at either population cleanly.
+
+#### `video_progress`
+- **Source:** `timeupdate` event on every `<video>`. Calculates `currentTime / duration * 100` and pushes when crossing 25, 50, 75, 100. Each milestone is latched by a `milestones[m]` flag — one push per milestone per video per page load. Also a fallback `ended` listener ensures 100 fires even if `timeupdate` skips the last tick.
+- **GTM trigger:** Custom Event, name `video_progress`, All Custom Events.
+- **Parameters:** `video_src`, `video_percent` (25/50/75/100), `video_location`
+- **Filter suggestion:** if you want separate GA4 events per milestone for cleaner reporting, create 4 triggers with conditions `video_percent equals 25/50/75/100`, each feeding a dedicated GA4 tag. Otherwise a single `video_progress` tag with `video_percent` as a parameter is simpler.
+
+#### `carousel_interaction`
+- **Source:** Two separate delegated listeners:
+  1. On every `[data-carousel]` wrapper (client-results page) — matches `.carousel-dot` children. Reads the dot's index in the sibling list.
+  2. On `#testimonials-home` (home page) — matches `.carousel-button` with `.next` or `.prev` classes.
+- **GTM trigger:** Custom Event, name `carousel_interaction`, All Custom Events.
+- **Parameters:**
+  - `carousel_id` — `data-carousel` attribute value, or `'testimonials_home'` for the home carousel
+  - `carousel_action: 'prev' | 'next' | 'dot'`
+  - `slide_index` — populated only when `carousel_action = 'dot'`
+- **Filter suggestion:** not Key-Event material.
+
+#### `scroll_depth`
+- **Source:** Passive `scroll` listener on `window`, rAF-throttled. Computes `(scrollTop / (scrollHeight - clientHeight)) * 100` and pushes when crossing 25/50/75/100. Each milestone latched.
+- **GTM trigger:** Custom Event, name `scroll_depth`, All Custom Events.
+- **Parameters:** `percent_depth` (25/50/75/100)
+- **Filter suggestion:** suppress `percent_depth = 100` on pages where the viewport already covers the full document (short pages) by adding an exception `Page Path equals /contact.html,/scoliosis.html` or wherever. Alternative: ignore `percent_depth = 100` entirely and use 75 as "read to end."
+- **Alternative:** GA4 has a **built-in** enhanced-measurement scroll event. If you enable that AND keep this custom one, you'll double-count. Pick one: either turn off GA4's built-in scroll tracking, or remove this event from the custom code. Currently both are active.
+
+---
 
 ### 3.5 Outbound
 
-| Event | Fires when | Parameters |
-|---|---|---|
-| `external_link_click` | User clicks any `<a>` whose URL is on a different host than the current page. Skips `tel:`, `mailto:`, `javascript:`, and pure anchor links. | `link_url`, `link_domain`, `link_text`, `link_location` (`'header' \| 'footer' \| 'promo' \| 'body'`) |
+#### `external_link_click`
+- **Source:** Delegated click listener on `document` (capture phase). Matches `e.target.closest('a[href]')`. Filters out `#anchor`, `javascript:`, `mailto:`, `tel:`. Compares parsed URL's `host` against `location.host` — pushes only when different.
+- **GTM trigger:** Custom Event, name `external_link_click`, All Custom Events.
+- **Parameters:**
+  - `link_url` — fully resolved URL (via `new URL(href, location.href).href`)
+  - `link_domain` — hostname only (e.g. `instagram.com`)
+  - `link_text` — anchor text, trimmed, capped
+  - `link_location: 'header' | 'footer' | 'promo' | 'body'`
+- **Filter suggestion:** add a trigger filter `link_domain contains calendar.google.com OR calendar.app.google` and wire that to a dedicated GA4 `booking_external` event — it captures actual clicks on Google Calendar scheduling links outside the embedded iframe path.
+
+---
 
 ### 3.6 Forms
 
-| Event | Fires when | Parameters |
-|---|---|---|
-| `form_start` | First `focusin` event on a `.enquiry-form` field (once per form per page load) | `form_name: 'enquiry_contact_form'` |
-| `form_submit_attempt` | The form's `submit` event fires (regardless of outcome) | `form_name` |
-| `form_submit_success` | **(Implemented in `script.js`, not `analytics.js`)** The async fetch to the form endpoint returns `ok` | `form_name` |
-| `form_submit_error` | Reserved for future use when form fetch fails. **Not yet wired** — `script.js` currently shows an `alert()` but doesn't push a dataLayer event on failure. See [Known gaps](#5-known-gaps-and-deliberate-omissions). | `form_name`, `error_message` |
+#### `form_start`
+- **Source:** `focusin` listener on every `.enquiry-form`. Guarded by a per-form `started` flag — one push per form per page load.
+- **GTM trigger:** Custom Event, name `form_start`, All Custom Events.
+- **Parameters:** `form_name: 'enquiry_contact_form'`
+- **Use case:** funnel step 1. Captures engagement even when the user abandons before submit.
+
+#### `form_submit_attempt`
+- **Source:** `submit` listener on every `.enquiry-form`. Fires before validation and before the fetch, so it captures *intent* regardless of success.
+- **GTM trigger:** Custom Event, name `form_submit_attempt`, All Custom Events.
+- **Parameters:** `form_name`
+
+#### `form_submit_success`
+- **Source:** **NOT in `analytics.js`** — it's in `src/assets/script.js` inside the `fetch().then(res => { if (res.ok) { ... } })` branch of the enquiry form handler.
+- **GTM trigger:** Custom Event, name `form_submit_success`, All Custom Events. **Mark as a Key Event in GA4** — this is your form conversion.
+- **Parameters:** `form_name`
+
+#### `form_submit_error`
+- **Reserved / NOT wired.** `script.js` currently calls `alert()` on fetch failure but doesn't push a dataLayer event. To enable, add a `dataLayer.push({event: 'form_submit_error', form_name: 'enquiry_contact_form', error_message: err.message})` inside the `.catch()` branch in `script.js`. See [Known gaps](#4-known-gaps-and-deliberate-omissions).
+
+---
 
 ### 3.7 Debug / meta
 
-| Event | Fires when | Parameters |
-|---|---|---|
-| `mvpt_analytics_ready` | `analytics.js` finishes executing | `analytics_version` (currently `'1.0.0'`) |
-
-Use this in GTM Preview mode to confirm the script loaded. Not useful for analytics reporting.
+#### `mvpt_analytics_ready`
+- **Source:** Final line of the `analytics.js` IIFE. Pushed synchronously after all listeners are attached.
+- **GTM trigger:** Custom Event, name `mvpt_analytics_ready`, All Custom Events.
+- **Parameters:** `analytics_version` (currently `'1.0.0'`)
+- **Use case:** in GTM Preview mode, confirms the instrumentation script loaded and IIFE executed without throwing. Not useful for reporting — do NOT wire a GA4 tag to this.
 
 ---
 

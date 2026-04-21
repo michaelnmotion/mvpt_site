@@ -8,16 +8,22 @@ This doc captures the **why** — what themes we're investing in and what "done"
 
 ## Theme priorities (re-ranked against goals)
 
-Given the organic-first lead-gen north star + martech/AI learning meta-goal:
+Given the June 2026 quit-job target + "stabilise at 15 weekly sessions + waitlist buffer" reframing + martech/AI learning meta-goal:
 
-1. **Content production system** (voice-to-blog pipeline) — unblocks organic growth
-2. **Content strategy — topic clusters** — the content the system feeds into
-3. **Image pipeline** — removes a current friction point, teachable build
-4. **Asset ingest system** (photo folder) — small, cheap, solves your actual workflow pain
-5. **Schema + machine-readable signals** — compounding AI visibility
-6. **Infrastructure + security** — Cloudflare migration unlocks analytics you need
-7. **Analytics evolution** — server-side events, conversion tracking
-8. **Tool evaluation** — monitor, don't build prematurely
+**Pre-June focus (6–8 weeks):**
+1. **Local search presence** — Google Business Profile + GSC + Bing WMT. Highest-ROI lead source for a service business.
+2. **Content strategy — ship 2–3 posts** — using the existing [content-workflow.md](content-workflow.md). Specifically the 20–25 injury-recovery and chronic-pain segments.
+3. **Schema gaps that compound** — Review/AggregateRating on homepage. Publisher logo fix.
+4. **Baseline measurement** — traffic split, funnel conversion, active client count.
+
+**Post-June, when there's more time:**
+5. **Image pipeline** — removes a friction point, teachable build, measurable performance win.
+6. **Asset ingest system** (photo folder) — cheap, solves real workflow pain.
+7. **Infrastructure + security** — Cloudflare Pages migration unlocks richer analytics + private repo.
+8. **Analytics evolution** — server-side events, `booking_confirmed` watcher.
+9. **Tool evaluation** — AI monitoring tool trial once the weekly query log shows meaningful data.
+
+**Note on "Content production workflow":** not a theme to build — a doc ([content-workflow.md](content-workflow.md)) to use. Wispr + Claude.ai + git covers it. Pipeline only if the workflow stops scaling.
 
 ---
 
@@ -53,32 +59,28 @@ Numbers make the "quit day job when…" decision concrete.
 
 ---
 
-## Theme: Content production system
+## Theme: Content production workflow
 
-**Goal:** make it possible to produce publication-ready blog content from a 30-min walk + ~30 min of editing. Without this, the topic-cluster content strategy doesn't ship, because the content budget is 2–4 hrs/week against a day job.
+**Goal:** make it possible to produce publication-ready blog content from a 30-min walk + ~15 min of editing, without building infrastructure. Sustainable cadence: ~2 posts/month.
 
-**Target workflow:**
+**Approach:** prompt + checklist, not pipeline. See [content-workflow.md](content-workflow.md) for the full spec — it's a one-page doc with the Claude prompt ready to copy-paste.
 
-1. **Brainstorm on walk** — record voice memo on phone (existing iOS Voice Memos or similar).
-2. **Upload** — drop the audio file into a designated folder. Options to evaluate:
-   - **Folder in the `mvpt_site` repo** (e.g. `content-drafts/audio/`) — triggers a GitHub Action on push.
-   - **iCloud / Google Drive folder** — cleaner separation of raw content from site code. Requires webhook or scheduled poll.
-   - **Dedicated app** (AirSend, Descript, etc.) — out-of-scope complexity.
-3. **Transcription** — Whisper API (OpenAI) or Groq Whisper. ~$0.006/min, so a 30-min memo costs ~$0.18. Very cheap.
-4. **Draft generation** — LLM call (Claude Sonnet or Haiku depending on cost/quality trade-off). System prompt frames it: "You are Michael Vincent, a Functional Patterns trainer in Melbourne. Below is a voice-memo transcript of a walk where you brainstormed a blog post. Draft the post in Michael's voice — direct, opinionated, FP-aligned, segment-appropriate. Output Markdown with frontmatter matching the schema of other posts."
-5. **PR creation** — GitHub Action opens a pull request with the drafted `.md` file + frontmatter + an AI-generated slug/title/tag. Human edits in GitHub web editor or locally, merges when done.
-6. **Auto-publish on merge** — existing CI flow already deploys on push to main.
+**The flow:**
 
-**Prerequisites:**
+1. Walk + talk (30 min) with Wispr Flow dictation running.
+2. Raw transcript arrives in Wispr.
+3. Open a Claude.ai session, paste the prompt from [content-workflow.md](content-workflow.md), append transcript.
+4. Claude returns a complete `.njk` file with frontmatter + BlogPosting JSON-LD + content.
+5. Review + edit (~15 min). Check voice, claims, internal links.
+6. Commit to `src/pages/blog-<slug>.njk`, add entry to `src/_data/posts.json`, push to staging → review → push to production.
 
-- OpenAI / Anthropic API keys (stored as GitHub Actions secrets)
-- GitHub Actions workflow (new file: `.github/workflows/voice-to-draft.yml`)
-- Style reference: 2–3 existing blog posts the LLM can study for voice (we only have one right now — may need 1–2 more manual posts first, or author a voice-guide doc)
-- Slug + frontmatter convention (already established in `blog-first-four.njk`)
+**No new infrastructure required.** Wispr you already have. Claude.ai you already use. Git + the existing CI flow handles deploys.
 
-**Learning value:** OpenAI/Anthropic APIs, GitHub Actions, secrets management, LLM prompt engineering, audio processing, CI/CD. All directly transferable to day-job martech work.
+**Revisit if:**
+- Edit time consistently exceeds 30 min → tune the prompt (voice reference, structure guidance).
+- Posting cadence becomes limited by the Claude.ai round-trip → consider building the API-based pipeline later. Not before.
 
-**Definition of done:** 5 blog posts published, where each one was seeded from a voice memo and required <30 min of human editing before merge.
+**Definition of done:** 3 blog posts shipped via this workflow by end-of-June, each requiring <30 min of edits post-draft.
 
 ---
 
@@ -245,8 +247,8 @@ Captured in [goals.md](goals.md#deferred--one-day-aspirations) — client portal
 
 ## Changelog (recent entries)
 
-- `2026-04-21` Added `goals.md`. Re-ranked theme priorities against the organic-first lead-gen north star. Promoted content production system + 20–25 injury segment to priority 1 + 2. Added asset ingest theme.
-- `2026-04-21` Split into `todo.md` + `roadmap.md`.
+- `2026-04-21` Corrected goal metric: 15 weekly sessions (not 15 clients). June 2026 quit timeline. Ads reframed as tactical accelerator. Replaced "content production system" theme (full pipeline spec) with "content production workflow" (1-page prompt + checklist via `content-workflow.md`). Re-ranked theme priorities into "pre-June" and "post-June" tiers.
+- `2026-04-21` Added `goals.md` + `content-workflow.md`. Split planning docs.
 - `2026-04-20` AI/retrieval signal files + per-page JSON-LD.
 - `2026-04-20` Production deploy of teal-homepage redesign + blog section.
 - `2026-04-19` Training-services numbered steps redesigned.

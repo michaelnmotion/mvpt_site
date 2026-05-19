@@ -44,7 +44,12 @@ main {
   width: 100%;
   aspect-ratio: 4/3;
   object-fit: cover;
+  object-position: center;
 }
+/* The HBS2 photo's subject is framed tight to the top of the frame —
+   default center-crop chops the top of the head. Anchor to the top
+   edge so the heads stay visible. */
+.my-story-photos .my-story-photo--hbs2 { object-position: center top; }
 .my-story-photos figcaption {
   margin-top: 8px;
   font-size: 0.95rem;
@@ -52,6 +57,66 @@ main {
 }
 @media (max-width: 640px) {
   .my-story-photos { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* HBS2 verification badge — a prominent pill link so it reads as a
+   real credential check rather than a passing hyperlink. */
+.hbs2-verify-wrap {
+  margin: 14px 0 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.hbs2-verify-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--accent);
+  color: var(--paper);
+  border-radius: 999px;
+  border: 1.6px solid var(--accent);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  transition: background-color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.hbs2-verify-badge:hover,
+.hbs2-verify-badge:focus-visible {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  color: var(--paper);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.hbs2-verify-badge__tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(250, 248, 244, 0.18);
+  font-size: 13px;
+  line-height: 1;
+}
+.hbs2-verify-badge__arrow { font-size: 16px; line-height: 1; }
+.hbs2-verify-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+/* Override legacy ".tab-content > section a { color: accent; underline }" */
+.tab-content > section a.hbs2-verify-badge,
+.tab-content > section a.hbs2-verify-badge:hover {
+  color: var(--paper);
+  text-decoration: none;
 }
 .mvpt-hero__media { border-radius: 6px; }
 

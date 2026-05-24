@@ -631,7 +631,7 @@ body > footer .footer-disclaimer {
   border-radius: 4px;
   overflow: hidden;
   background: var(--paper-2);
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 5 / 4;
   position: relative;
 }
 .mvpt-hero__media video,
@@ -1485,7 +1485,7 @@ body > footer .footer-disclaimer {
   }
   .mvpt-hero__title { font-size: 40px; }
   .mvpt-hero__lede { font-size: 16px; }
-  .mvpt-hero__media { aspect-ratio: 5 / 5; }
+  .mvpt-hero__media { aspect-ratio: 5 / 4; }
 
   .mvpt-stats { grid-template-columns: repeat(2, 1fr); }
   .mvpt-stat { padding: 20px; }

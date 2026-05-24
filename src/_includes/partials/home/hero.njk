@@ -15,9 +15,46 @@
     </ul>
   </div>
   <div class="mvpt-hero__media">
-    <video autoplay loop muted playsinline poster="hero_page.jpg" width="1920" height="1080" aria-label="Michael demonstrating Functional Patterns movement">
-      <source src="hero_page.mp4" type="video/mp4">
+    <video id="mvpt-hero-video" autoplay loop muted playsinline
+           poster="hero_page.jpg"
+           preload="auto"
+           data-src-hi="hero_page.mp4"
+           width="1920" height="1080"
+           aria-label="Michael demonstrating Functional Patterns movement">
+      <source src="hero_page_low.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
 </section>
+<script>
+(function() {
+  var v = document.getElementById('mvpt-hero-video');
+  if (!v) return;
+  var hi = v.getAttribute('data-src-hi');
+  if (!hi) return;
+
+  function swap() {
+    var pre = document.createElement('video');
+    pre.preload = 'auto';
+    pre.muted = true;
+    pre.src = hi;
+    pre.addEventListener('canplaythrough', function() {
+      var t = v.currentTime;
+      var src = v.querySelector('source');
+      if (src) src.src = hi; else v.src = hi;
+      v.load();
+      var resume = function() {
+        try { v.currentTime = t % (v.duration || t); } catch (e) {}
+        var p = v.play();
+        if (p && p.catch) p.catch(function(){});
+      };
+      if (v.readyState >= 2) resume();
+      else v.addEventListener('loadeddata', resume, { once: true });
+    }, { once: true });
+    pre.addEventListener('error', function() {}, { once: true });
+  }
+
+  if (!v.paused && v.currentTime > 0) swap();
+  else v.addEventListener('playing', swap, { once: true });
+})();
+</script>

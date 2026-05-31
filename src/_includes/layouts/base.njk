@@ -59,6 +59,15 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','{{ site.gtmId }}');</script>
 
+  <!-- Google tag (gtag.js) — direct GA4 loader for site-fired events -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.gaId }}', { send_page_view: false });
+  </script>
+
   <!-- Amplitude Tag -->
   <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script><script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.25.0-min.js.gz"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('efe3f493049ac82fdcc3c931fd850911', {"autocapture":{"elementInteractions":true}});</script>
 

@@ -245,6 +245,31 @@
       if (!wrap) return;
       push('discovery_call_click', { booking_provider: 'google_calendar' });
     }, true);
+
+    // booking_engage — fires once when user clicks into the cross-origin booking iframe.
+    // Cross-origin frames don't bubble focusin to the parent, so we use the standard
+    // window.blur + document.activeElement check.
+    if (iframes.length) {
+      window.addEventListener('blur', function () {
+        setTimeout(function () {
+          var active = document.activeElement;
+          if (!active || active.tagName !== 'IFRAME') return;
+          if (!active.src || active.src.indexOf('calendar.google.com/calendar/appointments') === -1) return;
+          if (active.__engaged) return;
+          active.__engaged = true;
+
+          var params = {
+            booking_type: 'initial_consult',
+            booking_provider: 'google_calendar'
+          };
+
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'booking_engage', params);
+          }
+          push('booking_engage', params);
+        }, 0);
+      });
+    }
   })();
 
   // ---------- Video engagement ----------
